@@ -19,7 +19,7 @@ public class BloodDonationSystemDbContext : DbContext
         model.Entity<Donor>()
             .HasOne(d => d.Address)
             .WithOne(a => a.Donor)
-            .HasForeignKey<Address>(a => a.Donor);
+            .HasForeignKey<Address>(a => a.DonorId);
 
         model.Entity<Donor>()
             .HasMany(d => d.Donations)

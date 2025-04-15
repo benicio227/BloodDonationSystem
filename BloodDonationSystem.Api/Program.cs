@@ -1,4 +1,7 @@
+using BloodDonationSystem.Application.Commands.InsertDonor;
+using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Persistence;
+using BloodDonationSystem.Infrastucture.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("BloodDonationSystemCs");
 builder.Services.AddDbContext<BloodDonationSystemDbContext>(o => o.UseSqlServer(connectionString));
+
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<InsertDonorCommand>());
+
+builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

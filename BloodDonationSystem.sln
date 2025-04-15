@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Core", "BloodDonationSystem.Core\BloodDonationSystem.Core.csproj", "{DBA88CCE-9386-4CEF-A234-1666BF2DBE85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Application", "BloodDonationSystem.Application\BloodDonationSystem.Application.csproj", "{BF49CF5A-3345-42EA-9952-A58A18558C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Infrastucture", "BloodDonationSystem.Infrastucture\BloodDonationSystem.Infrastucture.csproj", "{EA17DA97-08A9-45D5-A1E5-840C1DBC4724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Api", "BloodDonationSystem.Api\BloodDonationSystem.Api.csproj", "{5C6AE15A-51AD-48AE-8F9A-E21E75E68244}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBA88CCE-9386-4CEF-A234-1666BF2DBE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA88CCE-9386-4CEF-A234-1666BF2DBE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA88CCE-9386-4CEF-A234-1666BF2DBE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA88CCE-9386-4CEF-A234-1666BF2DBE85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF49CF5A-3345-42EA-9952-A58A18558C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF49CF5A-3345-42EA-9952-A58A18558C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF49CF5A-3345-42EA-9952-A58A18558C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF49CF5A-3345-42EA-9952-A58A18558C05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA17DA97-08A9-45D5-A1E5-840C1DBC4724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA17DA97-08A9-45D5-A1E5-840C1DBC4724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA17DA97-08A9-45D5-A1E5-840C1DBC4724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA17DA97-08A9-45D5-A1E5-840C1DBC4724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6AE15A-51AD-48AE-8F9A-E21E75E68244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6AE15A-51AD-48AE-8F9A-E21E75E68244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6AE15A-51AD-48AE-8F9A-E21E75E68244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6AE15A-51AD-48AE-8F9A-E21E75E68244}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
