@@ -21,7 +21,7 @@ public class DonorViewModel
     public string BloodType { get; private set; }
     public string RgFactor { get; private set; }
 
-    public DonorViewModel FromEntity(Donor donor)
+    public static DonorViewModel FromEntity(Donor donor)
     {
         return new DonorViewModel(donor.Id, donor.FullName, donor.Email, donor.BirthDate, donor.Gender, donor.Weight, donor.BloodType, donor.RgFactor);
     }
