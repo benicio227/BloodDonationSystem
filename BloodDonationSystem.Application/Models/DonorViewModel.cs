@@ -5,12 +5,14 @@ public class DonorViewModel
 {
     public DonorViewModel(int id, string fullName, string email, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor)
     {
+        Id = id;
         FullName = fullName;
         Email = email;
         BirthDate = birthDate;
         Gender = gender;
         Weight = weight;
         BloodType = bloodType;
+        RgFactor = rgFactor;
     }
     public int Id { get; private set; }
     public string FullName { get; private set; }
