@@ -1,0 +1,69 @@
+# Compiled source #
+###################
+bin/
+obj/
+
+# User-specific files #
+#######################
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results #
+##################
+*.dll
+*.exe
+*.app
+*.log
+
+# Visual Studio files #
+########################
+.vscode/
+.vs/
+*.code-workspace
+
+# ASP.NET Scaffolding #
+########################
+ScaffoldingReadMe.txt
+
+# NuGet #
+#########
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# DotCover #
+############
+.idea/
+*.dotCover
+
+# Logs #
+########
+*.log
+logs/
+log/
+
+# Database #
+############
+*.mdf
+*.ldf
+
+# Publish #
+###########
+publish/
+out/
+
+# Rider #
+#########
+.idea/
+*.sln.iml
+
+# Secrets and configs #
+########################
+secrets.json
+appsettings.Development.json
