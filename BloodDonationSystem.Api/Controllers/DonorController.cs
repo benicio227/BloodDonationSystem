@@ -15,9 +15,9 @@ public class DonorController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post(InsertDonorCommand command)
+    public async Task<IActionResult> Post(InsertDonorCommand command)
     {
-        var result = _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
         return Created(string.Empty, result);
     }

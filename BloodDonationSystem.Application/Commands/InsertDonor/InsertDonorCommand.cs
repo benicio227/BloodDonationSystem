@@ -5,13 +5,13 @@ using MediatR;
 namespace BloodDonationSystem.Application.Commands.InsertDonor;
 public class InsertDonorCommand : IRequest<DonorViewModel>
 {
-    public string FullName { get; private set; }
-    public string Email { get; private set; }
-    public DateTime BirthDate { get; private set; }
-    public string Gender { get; private set; }
-    public double Weight { get; private set; }
-    public string BloodType { get; private set; }
-    public string RgFactor { get; private set; }
+    public string FullName { get; set; }
+    public string Email { get; set; }
+    public DateTime BirthDate { get; set; }
+    public string Gender { get; set; }
+    public double Weight { get; set; }
+    public string BloodType { get; set; }
+    public string RgFactor { get; set; }
 
     public Donor ToEntity()
     {
