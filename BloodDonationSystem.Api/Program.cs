@@ -15,6 +15,9 @@ builder.Services.AddDbContext<BloodDonationSystemDbContext>(o => o.UseSqlServer(
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<InsertDonorCommand>());
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IDonationRepository, DonationRepository>();
+builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
