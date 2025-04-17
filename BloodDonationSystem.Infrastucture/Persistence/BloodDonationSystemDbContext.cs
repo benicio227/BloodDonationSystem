@@ -16,15 +16,7 @@ public class BloodDonationSystemDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder model)
     {
-        model.Entity<Donor>()
-            .HasOne(d => d.Address)
-            .WithOne(a => a.Donor)
-            .HasForeignKey<Address>(a => a.DonorId);
-
-        model.Entity<Donor>()
-            .HasMany(d => d.Donations)
-            .WithOne(donation => donation.Donor)
-            .HasForeignKey(donation => donation.DonorId);
+        model.ApplyConfigurationsFromAssembly(typeof(BloodDonationSystemDbContext).Assembly);
 
 
         base.OnModelCreating(model);
