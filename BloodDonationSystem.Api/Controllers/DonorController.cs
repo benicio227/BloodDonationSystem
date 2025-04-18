@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Commands.InsertDonor;
+using BloodDonationSystem.Application.Queries.GetDonorById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +21,15 @@ public class DonorController : ControllerBase
         var result = await _mediator.Send(command);
 
         return Created(string.Empty, result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var query = new GetDonorByIdQuery(id);
+
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 }
