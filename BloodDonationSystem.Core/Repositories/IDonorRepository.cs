@@ -3,5 +3,6 @@
 namespace BloodDonationSystem.Core.Repositories;
 public interface IDonorRepository
 {
-    public Task<Donor> Add(Donor donor);
+    public Task<Donor?> Add(Donor donor);
+    public Task<Donor?> GetById(int id);
 }
