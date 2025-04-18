@@ -16,6 +16,8 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Dona
     {
         var donor = await _donorRepository.GetById(request.DonorId);
 
+        await ValidateDonationInterval(donor.Id, donor.Gender);
+
         var data18Year = donor.BirthDate.AddYears(18);
 
         if (DateTime.Today < data18Year)
@@ -30,5 +32,25 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Dona
         var model = DonationViewModel.FromEntity(donation);
 
         return model;
+    }
+
+    private async Task ValidateDonationInterval(int donorId, string gender)
+    {
+        var lastDonation = await _repository.GetLastDonationByDonorId(donorId);
+
+        if (lastDonation is not null)
+        {
+            var daysSinceLastDonation = (DateTime.Today - lastDonation.DonationDate).TotalDays;
+
+            if (gender == "Feminino" && daysSinceLastDonation < 90)
+            {
+                throw new Exception("Mulheres só podem doar sangue a cada 90 dias.");
+            }
+            
+            if (gender == "Masculino" && daysSinceLastDonation < 60)
+            {
+                throw new Exception("Homens só pode doar sangue a cada 60 dias."); 
+            }
+        }
     }
 }
