@@ -13,6 +13,7 @@ public class InsertDonationValidator : AbstractValidator<InsertDonationCommand>
         RuleFor(d => d.AmountMl)
             .InclusiveBetween(420, 470)
                 .WithMessage("A quantidade de mililitros de sangue doados deve ser entre 420ml e 470ml.");
-                
     }
 }
+
+
