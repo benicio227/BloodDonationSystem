@@ -11,10 +11,17 @@ public class DonorRepository : IDonorRepository
     {
         _context = context;
     }
-    public async Task<Donor> Add(Donor donor)
+    public async Task<Donor?> Add(Donor donor)
     {
         await _context.AddAsync(donor);
         await _context.SaveChangesAsync();
+
+        return donor;
+    }
+
+    public async Task<Donor?> GetByEmail(string email)
+    {
+        var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Email == email);
 
         return donor;
     }
