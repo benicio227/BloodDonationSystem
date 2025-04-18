@@ -3,7 +3,7 @@ using BloodDonationSystem.Application.Models;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.InsertDonor;
-public class InsertDonorCommand : IRequest<DonorViewModel>
+public class InsertDonorCommand : IRequest<ResultViewModel<DonorViewModel>>
 {
     public string FullName { get; set; }
     public string Email { get; set; }
