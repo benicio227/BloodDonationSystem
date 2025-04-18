@@ -15,7 +15,8 @@ public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, Dona
     {
         var donation = await _repository.GetById(request.Id);
 
-        var model = DonationViewModel.FromEntity(donation);
+
+        var model = DonationViewModel.FromEntity(donation!);
 
         return model;
     }
