@@ -8,19 +8,19 @@ public class InsertDonorValidator : AbstractValidator<InsertDonorCommand>
     {
         RuleFor(d => d.FullName)
             .NotEmpty()
-                .WithMessage("Nome não pode ser vazio.")
+                .WithMessage("O nome é obrigatório.")
             .MaximumLength(100)
-                .WithMessage("Tamanho máximo deve ser até 100 caracteres.");
+                .WithMessage("O tamanho máximo deve ser de até 100 caracteres.");
 
         RuleFor(d => d.Email)
             .NotEmpty()
-                .WithMessage("Email não pode ser vazio")
+                .WithMessage("E-mail é obrigatório.")
             .EmailAddress()
-                .WithMessage("Email inválido.");
+                .WithMessage("E-mail inválido.");
 
         RuleFor(d => d.Gender)
             .NotEmpty()
-                .WithMessage("Gênero não ser ser vazio.")
+                .WithMessage("O gênero é obrigatório.")
             .Must(g => g == "Masculino" || g == "Feminino.")
                 .WithMessage("O gênero deve ser masculino ou feminino.");
 

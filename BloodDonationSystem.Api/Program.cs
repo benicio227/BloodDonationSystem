@@ -2,6 +2,8 @@ using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Persistence;
 using BloodDonationSystem.Infrastucture.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,9 @@ builder.Services.AddDbContext<BloodDonationSystemDbContext>(o => o.UseSqlServer(
 
 
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<InsertDonorCommand>());
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<InsertDonorCommand>();
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();

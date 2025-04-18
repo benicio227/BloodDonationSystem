@@ -24,6 +24,6 @@ public class InsertAddressValidator : AbstractValidator<InsertAddressCommand>
 
         RuleFor(a => a.Cep)
             .NotEmpty()
-                .WithMessage("O cep é obrigatório.");
+                .WithMessage("O CEP é obrigatório.");
     }
 }
