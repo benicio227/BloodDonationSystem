@@ -34,4 +34,10 @@ public class DonationRepository : IDonationRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<Donation?> GetLastDonationByDonorId(int id)
+    {
+        var donation = await _context.Donations.FirstOrDefaultAsync(d => d.DonorId == id);
+
+        return donation;
+    }
 }
