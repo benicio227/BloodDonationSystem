@@ -7,10 +7,15 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
 {
     private readonly IDonationRepository _repository;
     private readonly IDonorRepository _donorRepository;
-    public InsertDonationHandler(IDonationRepository repository, IDonorRepository donorRepository)
+    private readonly IBloodStockRepository _bloodStockrepository;
+    public InsertDonationHandler(
+        IDonationRepository repository,
+        IDonorRepository donorRepository,
+        IBloodStockRepository bloodStockRepository)
     {
         _repository = repository;
         _donorRepository = donorRepository;
+        _bloodStockrepository = bloodStockRepository;
     }
     public async Task<ResultViewModel<DonationViewModel>> Handle(InsertDonationCommand request, CancellationToken cancellationToken)
     {
@@ -33,6 +38,17 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
         var donation = request.ToEntity();
 
         await _repository.Add(donation);
+
+        var bloodStock = await _bloodStockrepository.GetByTypeAndFactor(donor.BloodType, donor.RgFactor);
+
+        if (bloodStock is null)
+        {
+            return ResultViewModel<DonationViewModel>.Error("Estoque não encontrado para esse tipo sanguíneo.");
+        }
+
+        bloodStock.AddAmount(donation.AmountMl);
+
+        await _bloodStockrepository.Update(bloodStock);
 
         var model = DonationViewModel.FromEntity(donation);
 
