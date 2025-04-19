@@ -43,4 +43,17 @@ public class BloodStockRepository : IBloodStockRepository
 
         return bloodStock;
     }
+
+    public async Task<BloodStock?> GetByTypeAndFactor(string bloodType, string rhFactor)
+    {
+        var bloodStock = await _context.bloodStocks.FirstOrDefaultAsync(b => b.BloodType == bloodType && b.RgFactor == rhFactor);
+
+        return bloodStock;
+    }
+
+    public async Task Update(BloodStock bloodStock)
+    {
+        _context.bloodStocks.Update(bloodStock);
+        await _context.SaveChangesAsync();
+    }
 }
