@@ -11,6 +11,7 @@ public class BloodStock
     public string BloodType {  get; private set; }
     public string RgFactor {  get; private set; }
     public int AmountMl { get; private set; }
+    public int MinimumAmountMl {  get; private set; }
     public void AddAmount(int amount)
     {
         AmountMl += amount;
