@@ -1,5 +1,7 @@
-﻿using BloodDonationSystem.Application.Models;
+﻿using BloodDonationSystem.Api.ExceptionHandler;
+using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
+
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.InsertDonation;
@@ -65,12 +67,12 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
 
             if (gender == "Feminino" && daysSinceLastDonation < 90)
             {
-                throw new Exception("Mulheres só podem doar sangue a cada 90 dias.");
+                throw new DonationIntervalException("Mulheres só podem doar sangue a cada 90 dias.");
             }
             
             if (gender == "Masculino" && daysSinceLastDonation < 60)
             {
-                throw new Exception("Homens só pode doar sangue a cada 60 dias."); 
+                throw new DonationIntervalException("Homens só pode doar sangue a cada 60 dias."); 
             }
         }
     }
