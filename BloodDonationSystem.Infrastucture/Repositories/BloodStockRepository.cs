@@ -36,4 +36,11 @@ public class BloodStockRepository : IBloodStockRepository
 
         return bloodStock;
     }
+
+    public async Task<BloodStock?> GetById(int id)
+    {
+        var bloodStock = await _context.bloodStocks.FirstOrDefaultAsync(b => b.Id == id);
+
+        return bloodStock;
+    }
 }
