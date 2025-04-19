@@ -1,3 +1,4 @@
+using BloodDonationSystem.Api.ExceptionHandler;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Persistence;
@@ -24,6 +25,9 @@ builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
 
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -37,6 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
