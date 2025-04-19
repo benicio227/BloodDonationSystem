@@ -1,6 +1,7 @@
 ﻿using BloodDonationSystem.Application.Commands.DeleteBlood;
 using BloodDonationSystem.Application.Commands.InsertBlood;
 using BloodDonationSystem.Application.Queries.GetAllBloodStock;
+using BloodDonationSystem.Application.Queries.GetBloodStockById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,19 @@ namespace BloodDonationSystem.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetAllBloodStockQuery());
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _mediator.Send(new GetBloodStockByIdQuery(id));
+
+            if (result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
 
             return Ok(result);
         }
