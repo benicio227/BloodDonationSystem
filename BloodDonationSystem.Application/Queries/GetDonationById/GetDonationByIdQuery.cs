@@ -3,7 +3,7 @@ using MediatR;
 using System.Runtime.InteropServices;
 
 namespace BloodDonationSystem.Application.Queries.GetDonationById;
-public class GetDonationByIdQuery : IRequest<DonationViewModel>
+public class GetDonationByIdQuery : IRequest<ResultViewModel<DonationViewModel>>
 {
     public GetDonationByIdQuery(int id)
     {

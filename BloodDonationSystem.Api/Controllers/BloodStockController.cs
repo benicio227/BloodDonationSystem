@@ -8,11 +8,11 @@ namespace BloodDonationSystem.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StockController : ControllerBase
+    public class BloodStockController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public StockController(IMediator mediator)
+        public BloodStockController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -22,6 +22,11 @@ namespace BloodDonationSystem.Api.Controllers
         {
             var result = await _mediator.Send(command);
 
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
             return Created(string.Empty, result);
         }
 
@@ -30,7 +35,6 @@ namespace BloodDonationSystem.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllBloodStockQuery());
 
-
             return Ok(result);
         }
 
@@ -38,6 +42,11 @@ namespace BloodDonationSystem.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteBloodStockCommand(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
 
             return NoContent();
         }

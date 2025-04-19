@@ -23,6 +23,11 @@ public class DonationController : ControllerBase
 
         var result = await _mediator.Send(command);
 
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
         return Created(string.Empty, result);
     }
 
@@ -33,6 +38,11 @@ public class DonationController : ControllerBase
 
         var result = await _mediator.Send(query);
 
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
         return Ok(result);
     }
 
@@ -42,6 +52,11 @@ public class DonationController : ControllerBase
         var query = new DeleteDonationByIdQuery(donorId);
 
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
 
         return NoContent();
     }

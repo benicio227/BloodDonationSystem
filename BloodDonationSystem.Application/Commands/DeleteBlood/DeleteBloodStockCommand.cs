@@ -1,7 +1,8 @@
-﻿using MediatR;
+﻿using BloodDonationSystem.Application.Models;
+using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.DeleteBlood;
-public class DeleteBloodStockCommand : IRequest<Unit>
+public class DeleteBloodStockCommand : IRequest<ResultViewModel<BloodStockViewModel>>
 {
     public DeleteBloodStockCommand(int id)
     {

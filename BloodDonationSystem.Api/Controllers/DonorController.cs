@@ -31,9 +31,15 @@ public class DonorController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
+
         var query = new GetDonorByIdQuery(id);
 
         var result = await _mediator.Send(query);
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
 
         return Ok(result);
     }

@@ -3,7 +3,7 @@ using BloodDonationSystem.Application.Models;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.InsertBlood;
-public class InsertBloodStockCommand : IRequest<BloodStockViewModel>
+public class InsertBloodStockCommand : IRequest<ResultViewModel<BloodStockViewModel>>
 {
     public string BloodType { get; set; }
     public string RgFactor { get; set; }

@@ -23,7 +23,12 @@ public class AddressController : ControllerBase
 
         var result = await _mediator.Send(command);
 
-        return Ok(result);
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return Created(string.Empty, result);
     }
 
     [HttpGet]
@@ -33,6 +38,11 @@ public class AddressController : ControllerBase
 
         var result = await _mediator.Send(query);
 
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
         return Ok(result);
     }
 
@@ -41,8 +51,13 @@ public class AddressController : ControllerBase
     {
         var query = new DeleteAddressByIdQuery(donorId);
 
-        await _mediator.Send(query);
+        var result = await _mediator.Send(query);
 
-        return Ok();
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return NoContent();
     }
 }

@@ -5,5 +5,5 @@ public interface IBloodStockRepository
 {
     public Task<BloodStock> Add(BloodStock bloodStock);
     public Task<List<BloodStock>> GetAll();
-    public Task Delete(int id);
+    public Task<BloodStock?> Delete(int id);
 }

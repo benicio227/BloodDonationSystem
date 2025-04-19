@@ -3,7 +3,7 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetDonationById;
-public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, DonationViewModel>
+public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, ResultViewModel<DonationViewModel>>
 {
     private readonly IDonationRepository _repository;
 
@@ -11,13 +11,17 @@ public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, Dona
     {
         _repository = repository;
     }
-    public async Task<DonationViewModel> Handle(GetDonationByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<DonationViewModel>> Handle(GetDonationByIdQuery request, CancellationToken cancellationToken)
     {
         var donation = await _repository.GetById(request.Id);
 
+        if (donation is null)
+        {
+            return ResultViewModel<DonationViewModel>.Error($"Doação com ID {request.Id} não encontrado.");
+        }
 
         var model = DonationViewModel.FromEntity(donation!);
 
-        return model;
+        return ResultViewModel<DonationViewModel>.Success(model);
     }
 }

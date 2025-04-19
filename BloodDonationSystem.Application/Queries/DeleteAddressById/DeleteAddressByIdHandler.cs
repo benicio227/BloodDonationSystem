@@ -1,8 +1,9 @@
-﻿using BloodDonationSystem.Core.Repositories;
+﻿using BloodDonationSystem.Application.Models;
+using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.DeleteAddressById;
-public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, Unit>
+public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, ResultViewModel<AddressViewModel>>
 {
     private readonly IAddressRepository _repository;
 
@@ -10,10 +11,17 @@ public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, 
     {
         _repository = repository;
     }
-    public async Task<Unit> Handle(DeleteAddressByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<AddressViewModel>> Handle(DeleteAddressByIdQuery request, CancellationToken cancellationToken)
     {
-        await _repository.Delete(request.Id);
+        var address = await _repository.Delete(request.Id);
 
-        return Unit.Value;
+        if (address is null)
+        {
+            return ResultViewModel<AddressViewModel>.Error($"Nehum endereço com ID {request.Id} foi encontrado.");
+        }
+
+        var model = AddressViewModel.FromEntity(address);
+
+        return ResultViewModel<AddressViewModel>.Success(model);
     }
 }

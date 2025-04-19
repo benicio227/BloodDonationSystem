@@ -26,12 +26,14 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public async Task Delete(int id)
+    public async Task<Address?> Delete(int id)
     {
         var address = await _context.Addresses.FirstOrDefaultAsync(a => a.DonorId == id);
 
         _context.Addresses.Remove(address!);
         await _context.SaveChangesAsync();
+
+        return address;
     }
 
 }

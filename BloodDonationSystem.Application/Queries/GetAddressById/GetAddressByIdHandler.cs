@@ -3,7 +3,7 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetAddressById;
-public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, AddressViewModel>
+public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, ResultViewModel<AddressViewModel>>
 {
     private readonly IAddressRepository _repository;
 
@@ -11,17 +11,17 @@ public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, Addres
     {
         _repository = repository;
     }
-    public async Task<AddressViewModel> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<AddressViewModel>> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
     {
         var address = await _repository.GetById(request.Id);
 
         if (address is null)
         {
-            throw new KeyNotFoundException("Endereço não encontrado");
+            return ResultViewModel<AddressViewModel>.Error("Endereço não encontrado");
         }
 
         var model = AddressViewModel.FromEntity(address);
 
-        return model;
+        return ResultViewModel<AddressViewModel>.Success(model);
     }
 }

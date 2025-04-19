@@ -17,7 +17,7 @@ public class InsertDonorHandler : IRequestHandler<InsertDonorCommand, ResultView
 
         if (donorExist is not null)
         {
-            return ResultViewModel<DonorViewModel>.Error(("Já existe um doador com esse E-mail."));
+            return ResultViewModel<DonorViewModel>.Error("Já existe um doador com esse E-mail.");
         }
 
         var donorEntity = request.ToEntity();

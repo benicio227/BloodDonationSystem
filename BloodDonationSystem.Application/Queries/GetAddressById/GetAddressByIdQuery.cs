@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetAddressById;
-public class GetAddressByIdQuery : IRequest<AddressViewModel>
+public class GetAddressByIdQuery : IRequest<ResultViewModel<AddressViewModel>>
 {
     public GetAddressByIdQuery(int id)
     {

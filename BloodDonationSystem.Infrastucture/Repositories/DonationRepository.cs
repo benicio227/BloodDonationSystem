@@ -26,12 +26,14 @@ public class DonationRepository : IDonationRepository
 
         return donation;
     }
-    public async Task Delete(int id)
+    public async Task<Donation?> Delete(int id)
     {
         var donation = await _context.Donations.FirstOrDefaultAsync(d => d.DonorId == id);
 
         _context.Donations.Remove(donation!);
         await _context.SaveChangesAsync();
+
+        return donation;
     }
 
     public async Task<Donation?> GetLastDonationByDonorId(int id)
