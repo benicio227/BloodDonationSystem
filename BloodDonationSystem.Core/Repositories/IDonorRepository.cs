@@ -6,4 +6,5 @@ public interface IDonorRepository
     public Task<Donor?> Add(Donor donor);
     public Task<Donor?> GetById(int id);
     public Task<Donor?> GetByEmail(string email);
+    public Task<Donor?> Update(int id);
 }
