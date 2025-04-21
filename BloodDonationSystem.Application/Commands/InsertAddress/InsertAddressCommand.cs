@@ -6,13 +6,6 @@ namespace BloodDonationSystem.Application.Commands.InsertAddress;
 public class InsertAddressCommand : IRequest<ResultViewModel<AddressViewModel>>
 {
     public int DonorId { get; set; }
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
     public string Cep { get; set; }
-
-    public Address ToEntity()
-    {
-        return new Address(DonorId, Street, City, State, Cep);
-    }
+    public string? Street { get; set; }
 }

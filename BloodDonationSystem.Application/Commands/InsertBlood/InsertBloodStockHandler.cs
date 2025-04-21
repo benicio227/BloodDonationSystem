@@ -15,6 +15,13 @@ public class InsertBloodStockHandler : IRequestHandler<InsertBloodStockCommand, 
     {
         var bloodStock = request.ToEntity();
 
+        var bloodStockExist = await _repsoitory.GetByTypeAndFactor(request.BloodType, request.RgFactor);
+
+        if (bloodStockExist is not null)
+        {
+            return ResultViewModel<BloodStockViewModel>.Error("Já existe estoque com o tipo sanguíneo informado.");
+        }
+
         var bloodExist = await _repsoitory.Add(bloodStock);
 
         if (bloodExist is null)

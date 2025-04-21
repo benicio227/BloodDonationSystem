@@ -30,7 +30,12 @@ public class AddressRepository : IAddressRepository
     {
         var address = await _context.Addresses.FirstOrDefaultAsync(a => a.DonorId == id);
 
-        _context.Addresses.Remove(address!);
+        if (address is null)
+        {
+            return null;
+        }
+
+        _context.Addresses.Remove(address);
         await _context.SaveChangesAsync();
 
         return address;

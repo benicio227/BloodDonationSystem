@@ -8,9 +8,10 @@ public class InsertBloodStockCommand : IRequest<ResultViewModel<BloodStockViewMo
     public string BloodType { get; set; }
     public string RgFactor { get; set; }
     public int AmountMl { get; set; }
+    public int MinimumAmountMl {  get; set; }
 
     public BloodStock ToEntity()
     {
-        return new BloodStock(BloodType, RgFactor, AmountMl);
+        return new BloodStock(BloodType, RgFactor, AmountMl, MinimumAmountMl);
     }
 }
