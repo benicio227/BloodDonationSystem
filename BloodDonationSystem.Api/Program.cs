@@ -1,6 +1,7 @@
 using BloodDonationSystem.Api.ExceptionHandler;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Core.Repositories;
+using BloodDonationSystem.Infrastucture.Cep;
 using BloodDonationSystem.Infrastucture.Persistence;
 using BloodDonationSystem.Infrastucture.Repositories;
 using FluentValidation;
@@ -24,6 +25,8 @@ builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
+
+builder.Services.AddHttpClient<ICepService, CepService>();
 
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
