@@ -5,11 +5,13 @@ public class ResultViewModel
     {
         IsSuccess = isSuccess;
         Message = message;
+        Warnings = new List<string>();
     }
 
     public bool IsSuccess {  get; private set; }
     public string Message {  get; private set; }
 
+    public List<string> Warnings { get; private set; }
     public static ResultViewModel Success()
     {
         return new ResultViewModel();
@@ -32,6 +34,15 @@ public class ResultViewModel<T> : ResultViewModel
     public static ResultViewModel<T> Success(T data)
     {
         return new ResultViewModel<T>(data);
+    }
+
+    public static ResultViewModel<T> SuccessWithWarnings(T data, List<string> warnings)
+    {
+        var result = new ResultViewModel<T>(data);
+
+        result.Warnings.AddRange(warnings);
+
+        return result;
     }
 
     public static ResultViewModel<T> Error(string message)
