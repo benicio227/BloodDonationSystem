@@ -30,7 +30,10 @@ public class DonationRepository : IDonationRepository
     {
         var donation = await _context.Donations.FirstOrDefaultAsync(d => d.DonorId == id);
 
-        _context.Donations.Remove(donation!);
+        if (donation is null)
+            return null;
+
+        _context.Donations.Remove(donation);
         await _context.SaveChangesAsync();
 
         return donation;
@@ -41,5 +44,12 @@ public class DonationRepository : IDonationRepository
         var donation = await _context.Donations.FirstOrDefaultAsync(d => d.DonorId == id);
 
         return donation;
+    }
+
+    public async Task<List<Donation?>> GetAll(int id)
+    {
+        var donations = await _context.Donations.Where(d => d.DonorId == id).ToListAsync();
+
+        return donations!;
     }
 }
