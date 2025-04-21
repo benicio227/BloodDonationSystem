@@ -31,7 +31,12 @@ public class BloodStockRepository : IBloodStockRepository
     {
         var bloodStock = await _context.bloodStocks.FirstOrDefaultAsync(b => b.Id == id);
 
-        _context.bloodStocks.Remove(bloodStock!);
+        if (bloodStock is null)
+        {
+            return null;
+        }
+
+        _context.bloodStocks.Remove(bloodStock);
         await _context.SaveChangesAsync();
 
         return bloodStock;
