@@ -54,6 +54,17 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
 
         var model = DonationViewModel.FromEntity(donation);
 
+        if (bloodStock.AmountMl < bloodStock.MinimumAmountMl)
+        {
+            var warnings = new List<string>
+            {
+                $"O estoque de sangue do tipo {donor.BloodType}{donor.RgFactor} está abaixo do mínimo {bloodStock.MinimumAmountMl}ml disponível."
+            };
+
+            return ResultViewModel<DonationViewModel>.SuccessWithWarnings(model, warnings);
+        }
+
+
         return ResultViewModel<DonationViewModel>.Success(model);
     }
 
