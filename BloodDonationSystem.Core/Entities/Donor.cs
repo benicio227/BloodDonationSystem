@@ -21,4 +21,24 @@ public class Donor
     public string RgFactor {  get; private set; }
     public List<Donation> Donations { get; private set; } = new List<Donation>();
     public Address? Address {  get; private set; }
+
+    public void UpdateEmail(string email)
+    {
+        Email = email;
+    }
+
+    public void UpdateWeight(double weight)
+    {
+        Weight = weight;
+    }
+
+    public void UpdateBloodType(string bloodType)
+    {
+        BloodType = bloodType;
+    }
+
+    public void UpdateRgFactor(string rgFactor)
+    {
+        RgFactor = rgFactor;
+    }
 }
