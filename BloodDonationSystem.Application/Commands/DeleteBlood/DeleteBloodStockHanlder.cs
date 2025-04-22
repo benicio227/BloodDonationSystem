@@ -1,7 +1,6 @@
 ﻿using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.Http.Timeouts;
 
 namespace BloodDonationSystem.Application.Commands.DeleteBlood;
 public class DeleteBloodStockHanlder : IRequestHandler<DeleteBloodStockCommand, ResultViewModel<BloodStockViewModel>>
@@ -14,14 +13,19 @@ public class DeleteBloodStockHanlder : IRequestHandler<DeleteBloodStockCommand, 
     }
     public async Task<ResultViewModel<BloodStockViewModel>> Handle(DeleteBloodStockCommand request, CancellationToken cancellationToken)
     {
-        var bloodStockExist = await _repository.Delete(request.Id);
+        var bloodStock = await _repository.Delete(request.Id);
 
-        if (bloodStockExist is null)
+        if (bloodStock is null)
         {
             return ResultViewModel<BloodStockViewModel>.Error($"Estoque de sanque com ID {request.Id} não encontrado.");
         }
 
-        var model = BloodStockViewModel.FromEntity(bloodStockExist);
+        if (bloodStock.IsDeleted)
+        {
+            return ResultViewModel<BloodStockViewModel>.Error("Estoque foi excluído.");
+        }
+
+        var model = BloodStockViewModel.FromEntity(bloodStock);
 
         return ResultViewModel<BloodStockViewModel>.Success(model);
     }

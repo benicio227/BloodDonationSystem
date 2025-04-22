@@ -2,7 +2,7 @@
 using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
-namespace BloodDonationSystem.Application.Queries.DeleteDonationById;
+namespace BloodDonationSystem.Application.Commands.DeleteDonation;
 public class DeleteDonationByIdHandler : IRequestHandler<DeleteDonationByIdQuery, ResultViewModel<DonationViewModel>>
 {
     private readonly IDonationRepository _repository;

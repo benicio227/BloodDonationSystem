@@ -1,5 +1,5 @@
-﻿using BloodDonationSystem.Application.Commands.InsertDonation;
-using BloodDonationSystem.Application.Queries.DeleteDonationById;
+﻿using BloodDonationSystem.Application.Commands.DeleteDonation;
+using BloodDonationSystem.Application.Commands.InsertDonation;
 using BloodDonationSystem.Application.Queries.GetAllDonationById;
 using BloodDonationSystem.Application.Queries.GetDonationById;
 using MediatR;

@@ -3,7 +3,6 @@ using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Cep;
 using MediatR;
-using Microsoft.AspNetCore.Http.Timeouts;
 
 namespace BloodDonationSystem.Application.Commands.InsertAddress;
 public class InsertAddressHandler : IRequestHandler<InsertAddressCommand, ResultViewModel<AddressViewModel>>
