@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Commands;
+using BloodDonationSystem.Application.Commands.DeleteDonor;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Application.Queries.GetDonorById;
 using MediatR;
@@ -45,6 +46,19 @@ public class DonorController : ControllerBase
         return Ok(result);
     }
 
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _mediator.Send(new DeleteDonorByIdCommand(id));
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.Message);
+        }
+
+        return NoContent();
+    }
+
     [HttpPatch("{id}")]
     public async Task<IActionResult> Update(UpdateDonorCoommand command)
     {
@@ -52,4 +66,6 @@ public class DonorController : ControllerBase
 
         return NoContent();
     }
+
+
 }
