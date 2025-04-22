@@ -35,10 +35,21 @@ public class AddressRepository : IAddressRepository
             return null;
         }
 
-        _context.Addresses.Remove(address);
+        address.Delete();
+
+        _context.Addresses.Update(address);
         await _context.SaveChangesAsync();
 
         return address;
     }
 
+    public async Task<Address?> Update(int id)
+    {
+        var address = await _context.Addresses.FirstOrDefaultAsync(a => a.Id == id);
+
+        _context.Addresses.Update(address);
+        await _context.SaveChangesAsync();
+
+        return address;
+    }
 }
