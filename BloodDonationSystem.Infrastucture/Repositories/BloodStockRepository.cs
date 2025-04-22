@@ -36,7 +36,7 @@ public class BloodStockRepository : IBloodStockRepository
             return null;
         }
 
-        _context.bloodStocks.Remove(bloodStock);
+        bloodStock.Delete();
         await _context.SaveChangesAsync();
 
         return bloodStock;
