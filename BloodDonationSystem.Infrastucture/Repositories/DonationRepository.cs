@@ -33,7 +33,7 @@ public class DonationRepository : IDonationRepository
         if (donation is null)
             return null;
 
-        _context.Donations.Remove(donation);
+        donation.Delete();
         await _context.SaveChangesAsync();
 
         return donation;
