@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Commands.InsertAddress;
+using BloodDonationSystem.Application.Commands.UpdateAddress;
 using BloodDonationSystem.Application.Queries.DeleteAddressById;
 using BloodDonationSystem.Application.Queries.GetAddressById;
 using MediatR;
@@ -44,6 +45,16 @@ public class AddressController : ControllerBase
         }
 
         return Ok(result);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put(int donorId, UpdateAddressCommand command)
+    {
+        command.Id = donorId;
+
+        var result = await _mediator.Send(command);
+
+        return NoContent();
     }
 
     [HttpDelete]
