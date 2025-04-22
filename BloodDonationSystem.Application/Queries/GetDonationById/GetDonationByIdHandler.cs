@@ -20,6 +20,11 @@ public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, Resu
             return ResultViewModel<DonationViewModel>.Error($"Doação com ID {request.Id} não encontrado.");
         }
 
+        if (donation.IsDeleted)
+        {
+            return ResultViewModel<DonationViewModel>.Error($"Donação foi excluída.");
+        }
+
         var model = DonationViewModel.FromEntity(donation!);
 
         return ResultViewModel<DonationViewModel>.Success(model);
