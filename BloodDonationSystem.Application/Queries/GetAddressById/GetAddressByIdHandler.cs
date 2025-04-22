@@ -17,7 +17,12 @@ public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, Result
 
         if (address is null)
         {
-            return ResultViewModel<AddressViewModel>.Error("Endereço não encontrado");
+            return ResultViewModel<AddressViewModel>.Error("Endereço não encontrado.");
+        }
+
+        if (address.IsDeleted)
+        {
+            return ResultViewModel<AddressViewModel>.Error("Este endereço foi excluído.");
         }
 
         var model = AddressViewModel.FromEntity(address);
