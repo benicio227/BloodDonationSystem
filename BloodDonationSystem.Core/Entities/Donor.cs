@@ -10,6 +10,7 @@ public class Donor
         Weight = weight;
         BloodType = bloodType;
         RgFactor = rgFactor;
+        IsDeleted = false;
     }
     public int Id { get; private set; }
     public string FullName { get; private set; }
@@ -19,6 +20,7 @@ public class Donor
     public double Weight { get; private set; }
     public string BloodType {  get; private set; }
     public string RgFactor {  get; private set; }
+    public bool IsDeleted {  get; private set; }
     public List<Donation> Donations { get; private set; } = new List<Donation>();
     public Address? Address {  get; private set; }
 
@@ -40,5 +42,15 @@ public class Donor
     public void UpdateRgFactor(string rgFactor)
     {
         RgFactor = rgFactor;
+    }
+
+    public void Delete()
+    {
+        IsDeleted = true;
+    }
+
+    public void Restore()
+    {
+        IsDeleted = false;
     }
 }
