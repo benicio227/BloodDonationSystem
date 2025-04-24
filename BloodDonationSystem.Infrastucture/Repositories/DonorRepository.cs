@@ -51,10 +51,8 @@ public class DonorRepository : IDonorRepository
         return donor;
     }
 
-    public async Task<Donor?> Update(int id)
+    public async Task<Donor?> Update(Donor donor)
     {
-        var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Id == id);
-
         _context.Donors.Update(donor);
         await _context.SaveChangesAsync();
 

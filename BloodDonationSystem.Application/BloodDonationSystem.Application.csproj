@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BloodDonationSystem.Core\BloodDonationSystem.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

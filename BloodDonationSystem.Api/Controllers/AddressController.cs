@@ -47,17 +47,17 @@ public class AddressController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Put(int donorId, UpdateAddressCommand command)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, UpdateAddressCommand command)
     {
-        command.Id = donorId;
+        command.Id = id;
 
         var result = await _mediator.Send(command);
 
         return NoContent();
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var query = new DeleteAddressByIdQuery(id);

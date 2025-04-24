@@ -30,7 +30,7 @@ public class DonorController : ControllerBase
         return Created(string.Empty, result);
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
 
@@ -46,7 +46,7 @@ public class DonorController : ControllerBase
         return Ok(result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteDonorByIdCommand(id));
@@ -60,9 +60,16 @@ public class DonorController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(UpdateDonorCoommand command)
+    public async Task<IActionResult> Update(int id, UpdateDonorCoommand command)
     {
+        command.Id = id;
+
         var result = await _mediator.Send(command);
+
+        if (id != command.Id)
+        {
+            return BadRequest("O id da rota não bate com o id do corpo da requisição.");
+        }
 
         return NoContent();
     }

@@ -44,7 +44,7 @@ namespace BloodDonationSystem.Api.Controllers
         {
             var result = await _mediator.Send(new GetBloodStockByIdQuery(id));
 
-            if (result.IsSuccess)
+            if (!result.IsSuccess)
             {
                 return BadRequest(result.Message);
             }
@@ -52,7 +52,7 @@ namespace BloodDonationSystem.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteBloodStockCommand(id));

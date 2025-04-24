@@ -25,7 +25,7 @@ public class UpdateDonorHandler : IRequestHandler<UpdateDonorCoommand, ResultVie
         donor.UpdateBloodType(request.BloodType);
         donor.UpdateRgFactor(request.RgFactor);
 
-        await _repository.Update(donor.Id);
+        await _repository.Update(donor);
 
         return ResultViewModel.Success();
     }
