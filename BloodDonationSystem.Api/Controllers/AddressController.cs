@@ -32,10 +32,10 @@ public class AddressController : ControllerBase
         return Created(string.Empty, result);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetById(int donorId)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
-        var query = new GetAddressByIdQuery(donorId);
+        var query = new GetAddressByIdQuery(id);
 
         var result = await _mediator.Send(query);
 
@@ -58,9 +58,9 @@ public class AddressController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(int donorId)
+    public async Task<IActionResult> Delete(int id)
     {
-        var query = new DeleteAddressByIdQuery(donorId);
+        var query = new DeleteAddressByIdQuery(id);
 
         var result = await _mediator.Send(query);
 

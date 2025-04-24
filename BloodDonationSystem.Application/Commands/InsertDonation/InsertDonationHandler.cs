@@ -1,5 +1,4 @@
-﻿using BloodDonationSystem.Api.ExceptionHandler;
-using BloodDonationSystem.Application.Models;
+﻿using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
 
 using MediatR;
@@ -68,7 +67,7 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
         return ResultViewModel<DonationViewModel>.Success(model);
     }
 
-    private async Task ValidateDonationInterval(int donorId, string gender)
+    private async Task<ResultViewModel<DonationViewModel>?> ValidateDonationInterval(int donorId, string gender)
     {
         var lastDonation = await _repository.GetLastDonationByDonorId(donorId);
 
@@ -78,13 +77,15 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
 
             if (gender == "Feminino" && daysSinceLastDonation < 90)
             {
-                throw new DonationIntervalException("Mulheres só podem doar sangue a cada 90 dias.");
+                return ResultViewModel<DonationViewModel>.Error("Mulheres só podem doar sangue a cada 90 dias.");
             }
             
             if (gender == "Masculino" && daysSinceLastDonation < 60)
             {
-                throw new DonationIntervalException("Homens só pode doar sangue a cada 60 dias."); 
+                return ResultViewModel<DonationViewModel>.Error("Homens só pode doar sangue a cada 60 dias."); 
             }
         }
+
+        return null;
     }
 }

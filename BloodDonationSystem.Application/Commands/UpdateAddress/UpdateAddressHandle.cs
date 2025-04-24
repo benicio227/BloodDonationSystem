@@ -15,7 +15,7 @@ public class UpdateAddressHandle : IRequestHandler<UpdateAddressCommand, ResultV
     {
         var address = await _repository.GetById(request.Id);
 
-        if (address == null)
+        if (address is null)
         {
             return ResultViewModel.Error("Endereço não encontrado.");
         }
