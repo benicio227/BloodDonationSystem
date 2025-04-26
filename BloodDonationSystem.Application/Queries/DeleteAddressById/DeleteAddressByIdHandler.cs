@@ -17,7 +17,7 @@ public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, 
 
         if (address is null)
         {
-            return ResultViewModel<AddressViewModel>.Error($"Nehum endereço com ID {request.Id} foi encontrado.");
+            return ResultViewModel<AddressViewModel>.Error("Nehum endereço com esse id foi encontrado.");
         }
 
         var model = AddressViewModel.FromEntity(address);
