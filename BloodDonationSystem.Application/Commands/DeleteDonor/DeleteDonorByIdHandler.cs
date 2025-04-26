@@ -1,7 +1,6 @@
 ﻿using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.Http.Timeouts;
 
 namespace BloodDonationSystem.Application.Commands.DeleteDonor;
 public class DeleteDonorByIdHandler : IRequestHandler<DeleteDonorByIdCommand, ResultViewModel>
@@ -16,7 +15,7 @@ public class DeleteDonorByIdHandler : IRequestHandler<DeleteDonorByIdCommand, Re
     {
         var donor = await _repository.GetById(request.Id);
 
-        if (donor == null)
+        if (donor is null)
         {
             return ResultViewModel.Error("Doador não encontrado.");
         }
