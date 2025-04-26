@@ -24,7 +24,12 @@ public class UpdateAddressHandle : IRequestHandler<UpdateAddressCommand, ResultV
         address.UpdateCity(request.City);
         address.UpdateState(request.State);
 
-        await _repository.Update(address.Id);
+        var updatedAddress =  await _repository.Update(address.Id);
+
+        if (updatedAddress is null)
+        {
+            return ResultViewModel.Error($"Erro ao atualizar o endereço.");
+        }
 
         return ResultViewModel.Success();
     }
