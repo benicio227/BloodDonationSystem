@@ -47,6 +47,11 @@ public class AddressRepository : IAddressRepository
     {
         var address = await _context.Addresses.FirstOrDefaultAsync(a => a.Id == id);
 
+        if (address is null)
+        {
+            return null;
+        }
+
         _context.Addresses.Update(address);
         await _context.SaveChangesAsync();
 
