@@ -26,7 +26,7 @@ public class InsertBloodStockHandler : IRequestHandler<InsertBloodStockCommand, 
 
         if (bloodExist is null)
         {
-            return ResultViewModel<BloodStockViewModel>.Error($"Nenhum estoque com ID {bloodExist!.Id}");
+            return ResultViewModel<BloodStockViewModel>.Error($"Erro ao adicionar estoque de sangue.");
         }
 
         var model = BloodStockViewModel.FromEntity(bloodStock);
