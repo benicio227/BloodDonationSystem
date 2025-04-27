@@ -27,19 +27,19 @@ public class BloodStockRepository : IBloodStockRepository
         return bloodStocks;
     }
 
-    public async Task<BloodStock?> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         var bloodStock = await _context.bloodStocks.FirstOrDefaultAsync(b => b.Id == id);
 
         if (bloodStock is null)
         {
-            return null;
+            return false;
         }
 
         bloodStock.Delete();
         await _context.SaveChangesAsync();
 
-        return bloodStock;
+        return true;
     }
 
     public async Task<BloodStock?> GetById(int id)

@@ -20,7 +20,7 @@ public class DeleteBloodStockHandlerTests
 
         typeof(BloodStock).GetProperty(nameof(BloodStock.Id))!.SetValue(bloodStock, 1);
 
-        repository.Delete(bloodStock.Id).Returns(bloodStock);
+        repository.Delete(bloodStock.Id).Returns(true);
 
         var handler = new DeleteBloodStockHanlder(repository);
 
@@ -29,8 +29,7 @@ public class DeleteBloodStockHandlerTests
         var result = await handler.Handle(command, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
-        Assert.NotNull(result.Data);
-        Assert.Equal(bloodStock.BloodType, result.Data.BloodType);
+
 
     }
 
@@ -40,7 +39,7 @@ public class DeleteBloodStockHandlerTests
       
         var repository = Substitute.For<IBloodStockRepository>();
 
-        repository.Delete(Arg.Any<int>()).Returns((BloodStock?)null);
+        repository.Delete(Arg.Any<int>()).Returns(false);
 
         var handler = new DeleteBloodStockHanlder(repository);
 
@@ -69,7 +68,7 @@ public class DeleteBloodStockHandlerTests
         typeof(BloodStock).GetProperty(nameof(BloodStock.Id))!.SetValue(bloodStock, 2);
         typeof(BloodStock).GetProperty(nameof(BloodStock.IsDeleted))!.SetValue(bloodStock, true);
 
-        repository.Delete(bloodStock.Id).Returns(bloodStock);
+        repository.Delete(bloodStock.Id).Returns(false);
 
         var handler = new DeleteBloodStockHanlder(repository);
 

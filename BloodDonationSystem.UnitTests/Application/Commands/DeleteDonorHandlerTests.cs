@@ -16,7 +16,7 @@ public class DeleteDonorHandlerTests
 
         repository.GetById(donor.Id).Returns(donor);
 
-        repository.Delete(donor.Id).Returns(donor);
+        repository.Delete(donor.Id).Returns(true);
 
         var command = new DeleteDonorByIdCommand(donor.Id);
 

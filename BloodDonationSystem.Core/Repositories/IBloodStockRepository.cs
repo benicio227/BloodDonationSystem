@@ -11,5 +11,5 @@ public interface IBloodStockRepository
     public Task<BloodStock?> GetByTypeAndFactor(string bloodType, string rhFactor);
 
     public Task Update(BloodStock bloodStock);
-    public Task<BloodStock?> Delete(int id);
+    public Task<bool> Delete(int id);
 }
