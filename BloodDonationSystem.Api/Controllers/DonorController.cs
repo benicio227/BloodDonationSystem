@@ -1,5 +1,4 @@
-﻿using BloodDonationSystem.Application.Commands;
-using BloodDonationSystem.Application.Commands.DeleteDonor;
+﻿using BloodDonationSystem.Application.Commands.DeleteDonor;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Application.Queries.GetDonorById;
 using MediatR;
@@ -60,16 +59,17 @@ public class DonorController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(int id, UpdateDonorCoommand command)
+    public async Task<IActionResult> Update(int id, UpdateDonorCommand command)
     {
-        command.Id = id;
 
         var result = await _mediator.Send(command);
 
-        if (id != command.Id)
+        if (id != command.Id && command.Id != 0)
         {
             return BadRequest("O id da rota não bate com o id do corpo da requisição.");
         }
+
+        command.Id = id;
 
         return NoContent();
     }

@@ -3,7 +3,7 @@ using BloodDonationSystem.Application.Models;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands;
-public class UpdateDonorCoommand : IRequest<ResultViewModel>
+public class UpdateDonorCommand : IRequest<ResultViewModel>
 {
     public int Id {  get; set; }
     public string Email { get; set; }
