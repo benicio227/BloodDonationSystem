@@ -3,5 +3,5 @@
 namespace BloodDonationSystem.Infrastucture.Cep;
 public interface ICepService
 {
-    Task<ViaCepViewModel?> ConsultarCepAscyn(string cep);
+    Task<ViaCepViewModel?> ConsultarCepAsync(string cep);
 }

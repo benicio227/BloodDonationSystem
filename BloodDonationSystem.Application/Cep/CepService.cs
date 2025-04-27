@@ -10,7 +10,7 @@ public class CepService : ICepService
     {
         _httpClient = httpClient;
     }
-    public async Task<ViaCepViewModel?> ConsultarCepAscyn(string cep)
+    public async Task<ViaCepViewModel?> ConsultarCepAsync(string cep)
     {
         var response = await _httpClient.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
 
