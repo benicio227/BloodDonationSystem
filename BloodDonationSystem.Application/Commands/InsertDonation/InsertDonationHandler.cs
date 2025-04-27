@@ -27,7 +27,12 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             return ResultViewModel<DonationViewModel>.Error($"Nenhum id {request.DonorId} encontrado.");
         }
 
-        await ValidateDonationInterval(donor.Id, donor.Gender);
+        var validResult =  await ValidateDonationInterval(donor.Id, donor.Gender);
+
+        if (validResult is not null)
+        {
+            return validResult;
+        }
 
         var data18Year = donor.BirthDate.AddYears(18);
 
@@ -82,10 +87,10 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             
             if (gender == "Masculino" && daysSinceLastDonation < 60)
             {
-                return ResultViewModel<DonationViewModel>.Error("Homens só pode doar sangue a cada 60 dias."); 
+                return ResultViewModel<DonationViewModel>.Error("Homens só podem doar sangue a cada 60 dias."); 
             }
         }
 
-        return ResultViewModel<DonationViewModel>.Success(null); ;
+        return null;
     }
 }
