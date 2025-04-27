@@ -5,31 +5,32 @@ using MediatR;
 namespace BloodDonationSystem.Application.Commands.InsertBlood;
 public class InsertBloodStockHandler : IRequestHandler<InsertBloodStockCommand, ResultViewModel<BloodStockViewModel>>
 {
-    private readonly IBloodStockRepository _repsoitory;
+    private readonly IBloodStockRepository _repository;
 
     public InsertBloodStockHandler(IBloodStockRepository repository)
     {
-        _repsoitory = repository;
+        _repository = repository;
     }
     public async Task<ResultViewModel<BloodStockViewModel>> Handle(InsertBloodStockCommand request, CancellationToken cancellationToken)
     {
         var bloodStock = request.ToEntity();
 
-        var bloodStockExist = await _repsoitory.GetByTypeAndFactor(request.BloodType, request.RgFactor);
+        var existingBloodStock = await _repository.GetByTypeAndFactor(request.BloodType, request.RgFactor);
 
-        if (bloodStockExist is not null)
+        if (existingBloodStock is not null)
         {
             return ResultViewModel<BloodStockViewModel>.Error("Já existe estoque com o tipo sanguíneo informado.");
         }
 
-        var bloodExist = await _repsoitory.Add(bloodStock);
 
-        if (bloodExist is null)
+        var addedBloodStock = await _repository.Add(bloodStock);
+
+        if (addedBloodStock is null)
         {
-            return ResultViewModel<BloodStockViewModel>.Error($"Erro ao adicionar estoque de sangue.");
+            return ResultViewModel<BloodStockViewModel>.Error($"Erro ao adicionar o estoque de sangue.");
         }
 
-        var model = BloodStockViewModel.FromEntity(bloodStock);
+        var model = BloodStockViewModel.FromEntity(addedBloodStock);
 
         return ResultViewModel<BloodStockViewModel>.Success(model);
     }
