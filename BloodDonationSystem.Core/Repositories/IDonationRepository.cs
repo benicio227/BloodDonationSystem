@@ -7,5 +7,5 @@ public interface IDonationRepository
     public Task<Donation?> GetById(int id);
     public Task<List<Donation?>> GetAll(int id);
     public Task<Donation?> GetLastDonationByDonorId(int id);
-    public Task<Donation?> Delete(int id);
+    public Task<bool> Delete(int id);
 }
