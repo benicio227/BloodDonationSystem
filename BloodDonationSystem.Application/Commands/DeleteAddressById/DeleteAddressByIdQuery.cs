@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.DeleteAddressById;
-public class DeleteAddressByIdQuery : IRequest<ResultViewModel<AddressViewModel>>
+public class DeleteAddressByIdQuery : IRequest<ResultViewModel>
 {
     public DeleteAddressByIdQuery(int id)
     {

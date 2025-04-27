@@ -3,7 +3,7 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.DeleteAddressById;
-public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, ResultViewModel<AddressViewModel>>
+public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, ResultViewModel>
 {
     private readonly IAddressRepository _repository;
 
@@ -11,17 +11,15 @@ public class DeleteAddressByIdHandler : IRequestHandler<DeleteAddressByIdQuery, 
     {
         _repository = repository;
     }
-    public async Task<ResultViewModel<AddressViewModel>> Handle(DeleteAddressByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel> Handle(DeleteAddressByIdQuery request, CancellationToken cancellationToken)
     {
-        var address = await _repository.Delete(request.Id);
+        var success = await _repository.Delete(request.Id);
 
-        if (address is null)
+        if (success is null)
         {
             return ResultViewModel<AddressViewModel>.Error("Nehum endereço com esse id foi encontrado.");
         }
 
-        var model = AddressViewModel.FromEntity(address);
-
-        return ResultViewModel<AddressViewModel>.Success(model);
+        return ResultViewModel.Success();
     }
 }
