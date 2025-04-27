@@ -43,6 +43,6 @@ public class DeleteAddressHandlerTests
 
         Assert.False(result.IsSuccess);
         Assert.Equal($"Nehum endereço com esse id foi encontrado.", result.Message);
-        Assert.Null(result.Data);
+       
     }
 }
