@@ -18,10 +18,7 @@ public class DeleteDonorHandlerTests
 
         repository.Delete(donor.Id).Returns(donor);
 
-        var command = new DeleteDonorByIdCommand
-        {
-            Id = donor.Id
-        };
+        var command = new DeleteDonorByIdCommand(donor.Id);
 
         var handler = new DeleteDonorByIdHandler(repository);
 
@@ -43,10 +40,7 @@ public class DeleteDonorHandlerTests
 
         repository.GetById(donorId).Returns((Donor)null!);
 
-        var command = new DeleteDonorByIdCommand
-        {
-            Id = donorId
-        };
+        var command = new DeleteDonorByIdCommand(donorId);
 
         var handler = new DeleteDonorByIdHandler(repository); 
 

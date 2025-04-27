@@ -1,6 +1,6 @@
-﻿using BloodDonationSystem.Application.Commands.InsertAddress;
+﻿using BloodDonationSystem.Application.Commands.DeleteAddressById;
+using BloodDonationSystem.Application.Commands.InsertAddress;
 using BloodDonationSystem.Application.Commands.UpdateAddress;
-using BloodDonationSystem.Application.Queries.DeleteAddressById;
 using BloodDonationSystem.Application.Queries.GetAddressById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
