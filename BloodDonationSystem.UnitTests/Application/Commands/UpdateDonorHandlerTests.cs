@@ -24,7 +24,7 @@ public class UpdateDonorHandlerTests
 
         typeof(Donor).GetProperty(nameof(Donor.Id))!.SetValue(donor, 1);
 
-        var command = new UpdateDonorCoommand
+        var command = new UpdateDonorCommand
         {
             Id = donor.Id
         };
@@ -59,7 +59,7 @@ public class UpdateDonorHandlerTests
 
         repository.GetById(donor.Id).Returns((Donor?)null);
 
-        var command = new UpdateDonorCoommand
+        var command = new UpdateDonorCommand
         {
             Id = donor.Id
         };
@@ -93,7 +93,7 @@ public class UpdateDonorHandlerTests
 
         repository.Update(Arg.Any<Donor>()).Returns(false);
 
-        var command = new UpdateDonorCoommand
+        var command = new UpdateDonorCommand
         {
             Id = donor.Id
         };

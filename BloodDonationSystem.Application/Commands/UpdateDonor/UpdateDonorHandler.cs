@@ -3,7 +3,7 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.UpdateDonor;
-public class UpdateDonorHandler : IRequestHandler<UpdateDonorCoommand, ResultViewModel>
+public class UpdateDonorHandler : IRequestHandler<UpdateDonorCommand, ResultViewModel>
 {
     private IDonorRepository _repository;
 
@@ -11,7 +11,7 @@ public class UpdateDonorHandler : IRequestHandler<UpdateDonorCoommand, ResultVie
     {
         _repository = repository;
     }
-    public async Task<ResultViewModel> Handle(UpdateDonorCoommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel> Handle(UpdateDonorCommand request, CancellationToken cancellationToken)
     {
         var donor = await _repository.GetById(request.Id);
 
