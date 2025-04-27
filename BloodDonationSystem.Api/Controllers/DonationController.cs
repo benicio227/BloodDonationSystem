@@ -14,7 +14,7 @@ public class DonationController : ControllerBase
 
     public DonationController(IMediator mediator)
     {
-        _mediator = mediator;   
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class DonationController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetDonationByIdQuery(id);
-                                         
+
         var result = await _mediator.Send(query);
 
         if (!result.IsSuccess)
@@ -62,7 +62,7 @@ public class DonationController : ControllerBase
         return Ok(result);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var query = new DeleteDonationByIdQuery(id);
