@@ -1,0 +1,86 @@
+﻿using BloodDonationSystem.Application.Commands.UpdateAddress;
+using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Repositories;
+using NSubstitute;
+
+namespace BloodDonationSystem.UnitTests.Application.Commands;
+public class UpdateAddressHandlerTests
+{
+    [Fact]
+    public async Task AddressExists_Update_Success()
+    {
+        var repository = Substitute.For<IAddressRepository>();
+
+        var existingAddress = new Address(1, "Rua antiga", "Cidade antiga", "UF", "12345-678");
+
+        var command = new UpdateAddressCommand
+        {
+            Id = existingAddress.Id,
+            Street = "Rua nova",
+            City = "Cidade nova",
+            State = "UF"
+        };
+
+        repository.GetById(existingAddress.Id).Returns(existingAddress);
+
+        repository.Update(existingAddress.Id).Returns(existingAddress);
+
+        var handler = new UpdateAddressHandle(repository);
+
+        var result = await handler.Handle(command, new CancellationToken());
+
+        Assert.True(result.IsSuccess);
+        Assert.True(string.IsNullOrEmpty(result.Message));
+    }
+
+    [Fact]
+    public async Task AddressNotFound_ShouldReturnError()
+    {
+        var repository = Substitute.For<IAddressRepository>();
+
+
+        var command = new UpdateAddressCommand
+        {
+            Id = 999,
+            Street = "Nova Rua",
+            City = "Nova Cidade",
+            State = "UF"
+        };
+
+        repository.GetById(command.Id).Returns((Address)null!);
+
+        var handler = new UpdateAddressHandle(repository);
+
+        var result = await handler.Handle(command, new CancellationToken());
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal("Endereço não encontrado.", result.Message);
+    }
+
+    [Fact]
+    public async Task UpdateFails_ShouldReturnError()
+    {
+        var repository = Substitute.For<IAddressRepository>();
+
+        var existingAddress = new Address(1, "Rua Antiga", "Cidade Antiga", "UF", "1234556");
+
+        var command = new UpdateAddressCommand
+        {
+            Id = existingAddress.Id,
+            Street = "Nova Rua",
+            City = "Nova Cidade",
+            State = "UF"
+        };
+
+        repository.GetById(command.Id).Returns(existingAddress);
+
+        repository.Update(existingAddress.Id).Returns((Address)null!);
+
+        var handler = new UpdateAddressHandle(repository);
+
+        var result = await handler.Handle(command, new CancellationToken());
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal($"Erro ao atualizar o endereço.", result.Message);
+    }
+}
