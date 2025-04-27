@@ -1,5 +1,5 @@
-﻿using BloodDonationSystem.Application.Entities;
-using BloodDonationSystem.Application.Queries.DeleteAddressById;
+﻿using BloodDonationSystem.Application.Commands.DeleteAddressById;
+using BloodDonationSystem.Application.Entities;
 using BloodDonationSystem.Core.Repositories;
 using NSubstitute;
 
