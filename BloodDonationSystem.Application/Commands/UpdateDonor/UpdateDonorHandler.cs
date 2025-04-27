@@ -5,7 +5,7 @@ using MediatR;
 namespace BloodDonationSystem.Application.Commands.UpdateDonor;
 public class UpdateDonorHandler : IRequestHandler<UpdateDonorCommand, ResultViewModel>
 {
-    private IDonorRepository _repository;
+    private readonly IDonorRepository  _repository;
 
     public UpdateDonorHandler(IDonorRepository repository)
     {
@@ -25,9 +25,9 @@ public class UpdateDonorHandler : IRequestHandler<UpdateDonorCommand, ResultView
         donor.UpdateBloodType(request.BloodType);
         donor.UpdateRgFactor(request.RgFactor);
 
-        var donorExist = await _repository.Update(donor);
+        var updateSuccessfully = await _repository.Update(donor);
 
-        if (!donorExist)
+        if (!updateSuccessfully)
         {
             return ResultViewModel.Error("Não foi possível atualizar o doador.");
         }
