@@ -86,6 +86,6 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             }
         }
 
-        return null;
+        return ResultViewModel<DonationViewModel>.Success(null); ;
     }
 }

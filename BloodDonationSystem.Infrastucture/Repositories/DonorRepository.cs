@@ -51,11 +51,11 @@ public class DonorRepository : IDonorRepository
         return donor;
     }
 
-    public async Task<Donor?> Update(Donor donor)
+    public async Task<bool> Update(Donor donor)
     {
         _context.Donors.Update(donor);
-        await _context.SaveChangesAsync();
+        var affectedRows = await _context.SaveChangesAsync();
 
-        return donor;
+        return affectedRows > 0;
     }
 }

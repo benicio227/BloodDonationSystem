@@ -25,7 +25,12 @@ public class UpdateDonorHandler : IRequestHandler<UpdateDonorCoommand, ResultVie
         donor.UpdateBloodType(request.BloodType);
         donor.UpdateRgFactor(request.RgFactor);
 
-        await _repository.Update(donor);
+        var donorExist = await _repository.Update(donor);
+
+        if (!donorExist)
+        {
+            return ResultViewModel.Error("Não foi possível atualizar o doador.");
+        }
 
         return ResultViewModel.Success();
     }
