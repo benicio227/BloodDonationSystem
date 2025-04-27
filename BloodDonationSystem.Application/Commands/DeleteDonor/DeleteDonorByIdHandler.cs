@@ -20,7 +20,12 @@ public class DeleteDonorByIdHandler : IRequestHandler<DeleteDonorByIdCommand, Re
             return ResultViewModel.Error("Doador não encontrado.");
         }
 
-        await _repository.Delete(donor.Id);
+        var deleted = await _repository.Delete(donor.Id);
+
+        if (!deleted)
+        {
+            return ResultViewModel.Error("Erro ao deletar o doador.");
+        }
 
         return ResultViewModel.Success();
     }
