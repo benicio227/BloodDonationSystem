@@ -18,7 +18,7 @@ public class InsertAddressHandler : IRequestHandler<InsertAddressCommand, Result
     public async Task<ResultViewModel<AddressViewModel>> Handle(InsertAddressCommand request, CancellationToken cancellationToken)
     {
 
-        var cepInfo = await _cepService.ConsultarCepAscyn(request.Cep);
+        var cepInfo = await _cepService.ConsultarCepAsync(request.Cep);
 
         if (cepInfo is null)
         {
@@ -45,14 +45,14 @@ public class InsertAddressHandler : IRequestHandler<InsertAddressCommand, Result
             request.Cep
         );
 
-        var addressExist = await _repository.Add(address);
+        var addedAddress = await _repository.Add(address);
 
-        if (addressExist is null)
+        if (addedAddress is null)
         {
-            return ResultViewModel<AddressViewModel>.Error($"Nenhum ID {request.DonorId} foi encontrado.");
+            return ResultViewModel<AddressViewModel>.Error($"Erro ao adicionar o endereço para o ID {request.DonorId}.");
         }
 
-        var model = AddressViewModel.FromEntity(address);
+        var model = AddressViewModel.FromEntity(addedAddress);
 
         return ResultViewModel<AddressViewModel>.Success(model);
     }
