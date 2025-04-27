@@ -29,7 +29,7 @@ public class InsertAddressHandlerTests
             Uf = "UF"
         };
 
-        cepService.ConsultarCepAscyn(command.Cep).Returns(fakeCepInfo);
+        cepService.ConsultarCepAsync(command.Cep).Returns(fakeCepInfo);
 
         var addedAddress = new Address(
             command.DonorId,
@@ -71,7 +71,7 @@ public class InsertAddressHandlerTests
             Street = "Rua das Flores"
         };
 
-        cepService.ConsultarCepAscyn(command.Cep).Returns((ViaCepViewModel?)null);
+        cepService.ConsultarCepAsync(command.Cep).Returns((ViaCepViewModel?)null);
 
         var handler = new InsertAddressHandler(repository, cepService);
 
@@ -103,7 +103,7 @@ public class InsertAddressHandlerTests
             Street = "string"
         };
 
-        cepService.ConsultarCepAscyn(command.Cep).Returns(fakeCepInfo);
+        cepService.ConsultarCepAsync(command.Cep).Returns(fakeCepInfo);
 
         var handler = new InsertAddressHandler(repository, cepService);
 
@@ -137,7 +137,7 @@ public class InsertAddressHandlerTests
             Cep = "1234-7678"
         };
 
-        cepService.ConsultarCepAscyn(command.Cep).Returns(fakeCepInfo);
+        cepService.ConsultarCepAsync(command.Cep).Returns(fakeCepInfo);
 
         repository.Add(Arg.Any<Address>()).Returns((Address?)null);
 

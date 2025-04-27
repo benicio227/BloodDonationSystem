@@ -3,11 +3,11 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.UpdateAddress;
-public class UpdateAddressHandle : IRequestHandler<UpdateAddressCommand, ResultViewModel>
+public class UpdateAddressHandler : IRequestHandler<UpdateAddressCommand, ResultViewModel>
 {
     private readonly IAddressRepository _repository;
 
-    public UpdateAddressHandle(IAddressRepository repository)
+    public UpdateAddressHandler(IAddressRepository repository)
     {
         _repository = repository;
     }
@@ -24,9 +24,9 @@ public class UpdateAddressHandle : IRequestHandler<UpdateAddressCommand, ResultV
         address.UpdateCity(request.City);
         address.UpdateState(request.State);
 
-        var updatedAddress =  await _repository.Update(address.Id);
+        var updatedSuccessfuly =  await _repository.Update(address);
 
-        if (updatedAddress is null)
+        if (!updatedSuccessfuly)
         {
             return ResultViewModel.Error($"Erro ao atualizar o endereço.");
         }

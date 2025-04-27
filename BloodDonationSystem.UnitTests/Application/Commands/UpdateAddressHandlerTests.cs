@@ -23,9 +23,9 @@ public class UpdateAddressHandlerTests
 
         repository.GetById(existingAddress.Id).Returns(existingAddress);
 
-        repository.Update(existingAddress.Id).Returns(existingAddress);
+        repository.Update(existingAddress).Returns(true);
 
-        var handler = new UpdateAddressHandle(repository);
+        var handler = new UpdateAddressHandler(repository);
 
         var result = await handler.Handle(command, new CancellationToken());
 
@@ -49,7 +49,7 @@ public class UpdateAddressHandlerTests
 
         repository.GetById(command.Id).Returns((Address)null!);
 
-        var handler = new UpdateAddressHandle(repository);
+        var handler = new UpdateAddressHandler(repository);
 
         var result = await handler.Handle(command, new CancellationToken());
 
@@ -74,9 +74,9 @@ public class UpdateAddressHandlerTests
 
         repository.GetById(command.Id).Returns(existingAddress);
 
-        repository.Update(existingAddress.Id).Returns((Address)null!);
+        repository.Update(existingAddress).Returns(false);
 
-        var handler = new UpdateAddressHandle(repository);
+        var handler = new UpdateAddressHandler(repository);
 
         var result = await handler.Handle(command, new CancellationToken());
 

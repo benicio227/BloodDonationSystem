@@ -43,18 +43,11 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public async Task<Address?> Update(int id)
+    public async Task<bool> Update(Address address)
     {
-        var address = await _context.Addresses.FirstOrDefaultAsync(a => a.Id == id);
-
-        if (address is null)
-        {
-            return null;
-        }
-
         _context.Addresses.Update(address);
-        await _context.SaveChangesAsync();
+        var updated = await _context.SaveChangesAsync();
 
-        return address;
+        return updated > 0;
     }
 }
