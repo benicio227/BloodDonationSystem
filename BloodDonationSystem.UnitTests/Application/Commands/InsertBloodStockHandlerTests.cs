@@ -9,7 +9,7 @@ public class InsertBloodStockHandlerTests
     [Fact]
     public async Task BloodStockExists_Insert_Success()
     {
-        //Arrange
+        
         var repository = Substitute.For<IBloodStockRepository>();
 
         var command = new InsertBloodStockCommand

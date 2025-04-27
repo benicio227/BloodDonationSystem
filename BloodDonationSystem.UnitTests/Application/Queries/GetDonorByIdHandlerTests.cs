@@ -57,7 +57,7 @@ public class GetDonorByIdHandlerTests
     [Fact]
     public async Task GetDonorById_ReturnsError_WhenDonorIsDeleted()
     {
-        // Arrange
+      
         var repository = Substitute.For<IDonorRepository>();
         var donor = new Donor(
             "Benício Brandão",
@@ -72,16 +72,16 @@ public class GetDonorByIdHandlerTests
 
         typeof(Donor).GetProperty("IsDeleted")?.SetValue(donor, true);
 
-        // Configurando o repositório para retornar o doador excluído
+
         repository.GetById(Arg.Any<int>()).Returns(donor);
 
         var handler = new GetDonorByIdHandler(repository);
-        var command = new GetDonorByIdQuery(1); // ID de exemplo
+        var command = new GetDonorByIdQuery(1); 
 
-        // Act
+     
         var result = await handler.Handle(command, CancellationToken.None);
 
-        // Assert
+    
         Assert.False(result.IsSuccess);
         Assert.Equal("Este doador foi excluído.", result.Message);
     }

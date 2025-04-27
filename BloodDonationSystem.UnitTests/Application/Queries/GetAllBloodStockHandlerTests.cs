@@ -9,7 +9,7 @@ public class GetAllBloodStockHandlerTests
     [Fact]
     public async Task GetAllBloodStock_ReturnsSuccess_WhenBloodStocksAreFound()
     {
-        // Arrange
+    
         var repository = Substitute.For<IBloodStockRepository>();
 
         var bloodStocks = new List<BloodStock>
@@ -24,10 +24,9 @@ public class GetAllBloodStockHandlerTests
         var handler = new GetAllBloodStockHandler(repository);
         var query = new GetAllBloodStockQuery();
 
-        // Act
+     
         var result = await handler.Handle(query, CancellationToken.None);
 
-        // Assert
         Assert.NotEmpty(result);
         Assert.Equal(2, result.Count);
         Assert.Equal("A+", result[0].BloodType);

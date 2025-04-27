@@ -58,8 +58,7 @@ public class InsertDonationHandlerTests
 
         var result = await handler.Handle(command, CancellationToken.None);
 
-        // Verifique se a doação foi adicionada à lista de doações do doador
-        Assert.Single(donor.Donations);  // Ou a coleção que você está verificando
+        Assert.Single(donor.Donations);
 
         Assert.True(result.IsSuccess);
         Assert.NotNull(result.Data);

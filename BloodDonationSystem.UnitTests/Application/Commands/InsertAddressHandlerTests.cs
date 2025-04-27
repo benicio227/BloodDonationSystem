@@ -11,7 +11,6 @@ public class InsertAddressHandlerTests
     [Fact]
     public async Task AddressExists_Insert_Success()
     {
-        //Arrange
 
         var repository = Substitute.For<IAddressRepository>();
         var cepService = Substitute.For<ICepService>();
@@ -44,10 +43,10 @@ public class InsertAddressHandlerTests
 
         var handler = new InsertAddressHandler(repository, cepService);
 
-        //Act
+        
         var result = await handler.Handle(command, new CancellationToken());
 
-        //Assert
+        
         Assert.True(result.IsSuccess);
         Assert.NotNull(result.Data);
         Assert.Equal(command.DonorId, result.Data!.DonorId);
@@ -61,7 +60,7 @@ public class InsertAddressHandlerTests
     [Fact]
     public async Task InvalidCep_ReturnsCep()
     {
-        //Arrange
+        
         var repository = Substitute.For<IAddressRepository>();
         var cepService = Substitute.For<ICepService>();
 
@@ -76,10 +75,10 @@ public class InsertAddressHandlerTests
 
         var handler = new InsertAddressHandler(repository, cepService);
 
-        //Act
+        
         var result = await handler.Handle(command, new CancellationToken());
 
-        //Assert
+        
         Assert.False(result.IsSuccess);
         Assert.Equal("CEP inválido ou não encontrado.", result.Message);
     }
@@ -108,10 +107,10 @@ public class InsertAddressHandlerTests
 
         var handler = new InsertAddressHandler(repository, cepService);
 
-        //Act
+       
         var result = await handler.Handle(command, new CancellationToken());
 
-        //Assert
+        
         Assert.False(result.IsSuccess);
         Assert.Equal("Não foi possível encontrar o nome da rua.", result.Message);
     }
@@ -119,7 +118,7 @@ public class InsertAddressHandlerTests
     [Fact]
     public async Task DonorIdNotFound_ReturnsError()
     {
-        //Arrange
+        
 
         var repository = Substitute.For<IAddressRepository>();
         var cepService = Substitute.For<ICepService>();

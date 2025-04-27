@@ -37,7 +37,7 @@ public class DeleteBloodStockHandlerTests
     [Fact]
     public async Task DeleteBloodStock_ReturnsError_WhenBloodStockNotFound()
     {
-        // Arrange
+      
         var repository = Substitute.For<IBloodStockRepository>();
 
         repository.Delete(Arg.Any<int>()).Returns((BloodStock?)null);
@@ -46,10 +46,9 @@ public class DeleteBloodStockHandlerTests
 
         var command = new DeleteBloodStockCommand(99);
 
-        // Act
+   
         var result = await handler.Handle(command, CancellationToken.None);
 
-        // Assert
         Assert.False(result.IsSuccess);
         Assert.Equal($"Estoque de sanque com ID {command.Id} não encontrado.", result.Message);
     }
@@ -57,7 +56,7 @@ public class DeleteBloodStockHandlerTests
     [Fact]
     public async Task DeleteBloodStock_ReturnsError_WhenAlreadyDeleted()
     {
-        // Arrange
+   
         var repository = Substitute.For<IBloodStockRepository>();
 
         var bloodStock = new BloodStock(
@@ -76,10 +75,10 @@ public class DeleteBloodStockHandlerTests
 
         var command = new DeleteBloodStockCommand(bloodStock.Id);
 
-        // Act
+     
         var result = await handler.Handle(command, CancellationToken.None);
 
-        // Assert
+
         Assert.False(result.IsSuccess);
         Assert.Equal("Estoque foi excluído.", result.Message);
     }
