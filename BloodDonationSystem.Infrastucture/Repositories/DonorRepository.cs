@@ -2,6 +2,7 @@
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Net;
 
 namespace BloodDonationSystem.Infrastucture.Repositories;
@@ -20,13 +21,13 @@ public class DonorRepository : IDonorRepository
         return donor;
     }
 
-    public async Task<Donor?> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Id == id);
 
         if (donor is null)
         {
-            return null;
+            return false;
         }
 
         donor.Delete();
@@ -34,7 +35,7 @@ public class DonorRepository : IDonorRepository
         _context.Donors.Update(donor);
         await _context.SaveChangesAsync();
 
-        return donor;
+        return true;
     }
 
     public async Task<Donor?> GetByEmail(string email)
