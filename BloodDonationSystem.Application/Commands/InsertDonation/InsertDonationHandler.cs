@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Models;
+using BloodDonationSystem.Core.Events;
 using BloodDonationSystem.Core.Repositories;
 
 using MediatR;
@@ -9,14 +10,17 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
     private readonly IDonationRepository _repository;
     private readonly IDonorRepository _donorRepository;
     private readonly IBloodStockRepository _bloodStockrepository;
+    private readonly IMediator _mediator;
     public InsertDonationHandler(
         IDonationRepository repository,
         IDonorRepository donorRepository,
-        IBloodStockRepository bloodStockRepository)
+        IBloodStockRepository bloodStockRepository,
+        IMediator mediator)
     {
         _repository = repository;
         _donorRepository = donorRepository;
         _bloodStockrepository = bloodStockRepository;
+        _mediator = mediator;
     }
     public async Task<ResultViewModel<DonationViewModel>> Handle(InsertDonationCommand request, CancellationToken cancellationToken)
     {
@@ -64,6 +68,15 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             {
                 $"O estoque de sangue do tipo {donor.BloodType}{donor.RgFactor} está abaixo do mínimo {bloodStock.MinimumAmountMl}ml disponível."
             };
+
+            var domainEvent = new BloodStockBelowMinimumDomainEvent(
+                donor.BloodType,
+                donor.RgFactor,
+                bloodStock.AmountMl,
+                bloodStock.MinimumAmountMl
+            );
+
+            await _mediator.Publish(domainEvent, cancellationToken);
 
             return ResultViewModel<DonationViewModel>.SuccessWithWarnings(model, warnings);
         }
