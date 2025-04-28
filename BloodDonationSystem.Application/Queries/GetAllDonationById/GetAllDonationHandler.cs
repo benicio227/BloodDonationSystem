@@ -1,10 +1,9 @@
-﻿using BloodDonationSystem.Application.Entities;
-using BloodDonationSystem.Application.Models;
+﻿using BloodDonationSystem.Application.Models;
 using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetAllDonationById;
-public class GetAllDonationHandler : IRequestHandler<GetAllDonationQuery, ResultViewModel<List<Donation>>>
+public class GetAllDonationHandler : IRequestHandler<GetAllDonationQuery, ResultViewModel<List<DonationViewModel>>>
 {
     private readonly IDonationRepository _repository;
 
@@ -12,15 +11,20 @@ public class GetAllDonationHandler : IRequestHandler<GetAllDonationQuery, Result
     {
         _repository = repository;
     }
-    public async Task<ResultViewModel<List<Donation>>> Handle(GetAllDonationQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<List<DonationViewModel>>> Handle(GetAllDonationQuery request, CancellationToken cancellationToken)
     {
         var donations = await _repository.GetAll(request.Id);
 
         if (donations is null || !donations.Any())
         {
-            return ResultViewModel<List<Donation>>.Error($"Nenhum ID {request.Id} encontrado.");
+            return ResultViewModel<List<DonationViewModel>>.Error($"Nenhuma doação encontrada.");
         }
 
-        return ResultViewModel<List<Donation>>.Success(donations!);
+        var models = donations
+            .Where(d => !d.IsDeleted) // Se quiser filtrar excluídos aqui também
+            .Select(DonationViewModel.FromEntity)
+            .ToList();
+
+        return ResultViewModel<List<DonationViewModel>>.Success(models);
     }
 }
