@@ -1,6 +1,7 @@
 ﻿using BloodDonationSystem.Application.Commands.InsertDonation;
 using BloodDonationSystem.Application.Entities;
 using BloodDonationSystem.Core.Repositories;
+using MediatR;
 using NSubstitute;
 
 namespace BloodDonationSystem.UnitTests.Application.Commands;
@@ -12,6 +13,7 @@ public class InsertDonationHandlerTests
         var donationRepository = Substitute.For<IDonationRepository>();
         var donorRepository = Substitute.For<IDonorRepository>();
         var bloodStockRepository = Substitute.For<IBloodStockRepository>();
+        var mediator = Substitute.For<IMediator>();
 
         var donor = new Donor
         (
@@ -54,7 +56,7 @@ public class InsertDonationHandlerTests
         bloodStockRepository.GetByTypeAndFactor(donor.BloodType, donor.RgFactor).Returns(bloodStock);
         bloodStockRepository.Update(bloodStock).Returns(Task.CompletedTask);
 
-        var handler = new InsertDonationHandler(donationRepository, donorRepository, bloodStockRepository);
+        var handler = new InsertDonationHandler(donationRepository, donorRepository, bloodStockRepository, mediator);
 
         var result = await handler.Handle(command, CancellationToken.None);
 
