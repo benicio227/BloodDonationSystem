@@ -16,14 +16,9 @@ public class GetDonorByIdHandler : IRequestHandler<GetDonorByIdQuery, ResultView
     {
         var donor = await _repository.GetById(request.Id);
 
-        if (donor is null)
+        if (donor is null || donor.IsDeleted)
         {
             return ResultViewModel<DonorViewModel>.Error($"Doador com ID {request.Id} não encontrado.");
-        }
-
-        if (donor.IsDeleted)
-        {
-            return ResultViewModel<DonorViewModel>.Error($"Este doador foi excluído.");
         }
 
         var model = DonorViewModel.FromEntity(donor!);
