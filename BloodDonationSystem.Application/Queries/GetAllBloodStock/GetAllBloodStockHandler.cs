@@ -3,7 +3,7 @@ using BloodDonationSystem.Core.Repositories;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetAllBloodStock;
-public class GetAllBloodStockHandler : IRequestHandler<GetAllBloodStockQuery, List<BloodStockViewModel>>
+public class GetAllBloodStockHandler : IRequestHandler<GetAllBloodStockQuery,ResultViewModel<List<BloodStockViewModel>>>
 {
     private readonly IBloodStockRepository _repository;
 
@@ -11,12 +11,17 @@ public class GetAllBloodStockHandler : IRequestHandler<GetAllBloodStockQuery, Li
     {
         _repository = repository;
     }
-    public async Task<List<BloodStockViewModel>> Handle(GetAllBloodStockQuery request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<List<BloodStockViewModel>>> Handle(GetAllBloodStockQuery request, CancellationToken cancellationToken)
     {
         var bloodStocks = await _repository.GetAll();
 
-        var bloodStockViewModel = bloodStocks.Select(bloodStock => BloodStockViewModel.FromEntity(bloodStock)).ToList(); ;
+        if (bloodStocks is null || !bloodStocks.Any())
+        {
+            return ResultViewModel<List<BloodStockViewModel>>.Error("Nenhum estoque de sangue encontrado.");
+        }
 
-        return bloodStockViewModel;
+        var bloodStockViewModels = bloodStocks.Select(BloodStockViewModel.FromEntity).ToList();
+
+        return ResultViewModel<List<BloodStockViewModel>>.Success(bloodStockViewModels);
     }
 }
