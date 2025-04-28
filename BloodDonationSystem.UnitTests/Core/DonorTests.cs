@@ -6,7 +6,7 @@ public class DonorTests
     [Fact]
     public void Donor_ShouldBeCreatedWithCorrectValues()
     {
-        //Arrange
+      
         var fullName = "João da Silva";
         var email = "Joao@hotmail.com";
         var birthDate = new DateTime(1994, 04, 07);
@@ -15,10 +15,10 @@ public class DonorTests
         var bloodType = "A+";
         var rgFactor = "R-";
 
-        //Act
+      
         var donor = new Donor(fullName, email, birthDate, gender, weight, bloodType, rgFactor);
 
-        //Assert
+      
         Assert.Equal(fullName, donor.FullName);
         Assert.Equal(email, donor.Email);
         Assert.Equal(birthDate, donor.BirthDate);
@@ -32,13 +32,13 @@ public class DonorTests
     [Fact]
     public void Delete_ShouldBeSetIsDeletedTrue()
     {
-        //Arrange
+      
         var donor = DonorPropertiesTest();
 
-        //Act
+      
         donor.Delete();
 
-        //Assert
+       
         Assert.True(donor.IsDeleted);
     }
 

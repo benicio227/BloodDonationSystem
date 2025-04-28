@@ -6,16 +6,15 @@ public class BloodStockTests
     [Fact]
     public void BloodStock_ShouldBeCreatedWithCorrectValues()
     {
-        //Arrange
         var bloodTye = "A+";
         var rgFactor = "R+";
         var amountMl = 0;
         var minimumAmountMl = 1000;
 
-        //Act
+        
         var bloodStock = new BloodStock(bloodTye, rgFactor, amountMl, minimumAmountMl);
 
-        //Assert
+    
         Assert.Equal(bloodTye, bloodStock.BloodType);
         Assert.Equal(rgFactor, bloodStock.RgFactor);
         Assert.Equal(amountMl, bloodStock.AmountMl);
