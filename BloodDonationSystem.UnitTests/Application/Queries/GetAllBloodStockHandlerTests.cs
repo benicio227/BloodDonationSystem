@@ -27,6 +27,8 @@ public class GetAllBloodStockHandlerTests
      
         var result = await handler.Handle(query, CancellationToken.None);
 
+        Assert.True(result.IsSuccess);
+        Assert.NotNull(result.Data);
         Assert.NotEmpty(result.Data);
         Assert.Equal(2, result.Data.Count);
         Assert.Equal("A+", result.Data[0].BloodType);
