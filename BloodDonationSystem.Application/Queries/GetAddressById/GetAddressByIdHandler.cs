@@ -15,14 +15,9 @@ public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, Result
     {
         var address = await _repository.GetById(request.Id);
 
-        if (address is null)
+        if (address is null || address.IsDeleted)
         {
             return ResultViewModel<AddressViewModel>.Error("Endereço não encontrado.");
-        }
-
-        if (address.IsDeleted)
-        {
-            return ResultViewModel<AddressViewModel>.Error("Este endereço foi excluído.");
         }
 
         var model = AddressViewModel.FromEntity(address);
