@@ -15,7 +15,7 @@ public class GetBloodStockByIdHandler : IRequestHandler<GetBloodStockByIdQuery, 
     {
         var bloodStock = await _repository.GetById(request.Id);
 
-        if (bloodStock is null)
+        if (bloodStock is null || bloodStock.IsDeleted)
         {
             return ResultViewModel<BloodStockViewModel>.Error("Estoque não encontrado com o ID fornecido.");
         }
