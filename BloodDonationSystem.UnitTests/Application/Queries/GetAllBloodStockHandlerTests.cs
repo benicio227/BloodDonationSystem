@@ -27,10 +27,10 @@ public class GetAllBloodStockHandlerTests
      
         var result = await handler.Handle(query, CancellationToken.None);
 
-        Assert.NotEmpty(result);
-        Assert.Equal(2, result.Count);
-        Assert.Equal("A+", result[0].BloodType);
-        Assert.Equal("B-", result[1].BloodType);
+        Assert.NotEmpty(result.Data);
+        Assert.Equal(2, result.Data.Count);
+        Assert.Equal("A+", result.Data[0].BloodType);
+        Assert.Equal("B-", result.Data[1].BloodType);
     }
 
     [Fact]
@@ -47,6 +47,6 @@ public class GetAllBloodStockHandlerTests
         
         var result = await handler.Handle(query, CancellationToken.None);
 
-        Assert.Empty(result);
+        Assert.Empty(result.Data);
     }
 }
