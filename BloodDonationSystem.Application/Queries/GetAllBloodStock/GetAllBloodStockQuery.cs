@@ -2,6 +2,6 @@
 using MediatR;
 
 namespace BloodDonationSystem.Application.Queries.GetAllBloodStock;
-public class GetAllBloodStockQuery : IRequest<List<BloodStockViewModel>>
+public class GetAllBloodStockQuery : IRequest<ResultViewModel<List<BloodStockViewModel>>>
 {
 }
