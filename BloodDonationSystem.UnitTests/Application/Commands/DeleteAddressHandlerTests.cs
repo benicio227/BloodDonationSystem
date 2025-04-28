@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class DeleteAddressHandlerTests
 {
     [Fact]
-    public async Task AddressExists_Delete_Success()
+    public async Task Handler_WhenAddressExists_Should_Delete()
     {
         var repository = Substitute.For<IAddressRepository>();
 
@@ -27,7 +27,7 @@ public class DeleteAddressHandlerTests
     }
 
     [Fact]
-    public async Task AddressNotFound_Delete_ShouldReturnError()
+    public async Task Handler_WhenAddressNotFound_Should_ReturnError()
     {
         var repository = Substitute.For<IAddressRepository>();
 

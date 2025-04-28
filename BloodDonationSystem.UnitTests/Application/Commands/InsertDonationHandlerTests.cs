@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class InsertDonationHandlerTests
 {
     [Fact]
-    public async Task InsertDonation_Success_ShouldReturnSuccessResult()
+    public async Task Handle_WhenInputDataIsValid_ShouldInsertDonationSuccessfully()
     {
         var donationRepository = Substitute.For<IDonationRepository>();
         var donorRepository = Substitute.For<IDonorRepository>();

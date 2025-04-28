@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class InsertDonorHandlerTests
 {
     [Fact]
-    public async Task InputDataAreOk_Insert_Success_NSubstitute()
+    public async Task Handle_WhenInputDataIsValid_ShouldInsertDonorSuccessfully()
     {
       
         var repository = Substitute.For<IDonorRepository>(); 
@@ -42,7 +42,7 @@ public class InsertDonorHandlerTests
 
 
     [Fact]
-    public async Task DonorAlreadyExists_ReturnsError()
+    public async Task Handle_WhenDonorAlreadyExists_ShouldReturnError()
     {
         var repository = Substitute.For<IDonorRepository>();
 

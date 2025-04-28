@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Queries;
 public class GetAddressByIdHandlerTests
 {
     [Fact]
-    public async Task GetAddressById_ReturnsSuccess_WhenAddressIsFoundAndNotDeleted()
+    public async Task Handle_WhenAddressExistsAndNotFound_ShouldReturnAddressSuccessfully()
     {
         var repository = Substitute.For<IAddressRepository>();
 
@@ -36,7 +36,7 @@ public class GetAddressByIdHandlerTests
     }
 
     [Fact]
-    public async Task GetAddressById_ReturnsError_WhenAddressNotFound()
+    public async Task Handle_WhenAddressNotFound_ShouldReturnError()
     {
         
         var repository = Substitute.For<IAddressRepository>();
@@ -54,7 +54,7 @@ public class GetAddressByIdHandlerTests
     }
 
     [Fact]
-    public async Task GetAddressById_ReturnsError_WhenAddressIsDeleted()
+    public async Task Handle_WhenBloodStockIsDeleted_ShouldReturnError()
     {
         var repository = Substitute.For<IAddressRepository>();
         

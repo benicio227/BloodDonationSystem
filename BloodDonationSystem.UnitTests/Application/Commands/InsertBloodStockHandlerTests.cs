@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class InsertBloodStockHandlerTests
 {
     [Fact]
-    public async Task BloodStockExists_Insert_Success()
+    public async Task Handle_WhenBloodStockDoesNotExist_ShouldInsertBloodStockSuccessfully()
     {
         
         var repository = Substitute.For<IBloodStockRepository>();
@@ -39,7 +39,7 @@ public class InsertBloodStockHandlerTests
     }
 
     [Fact]
-    public async Task AlreadyExistsBloodStock_With_Same_BloodTypeAndRgFactor()
+    public async Task Handle_WhenBloodStockAlreadyExists_ShouldReturnError()
     {
         var repository = Substitute.For<IBloodStockRepository>();
 
@@ -64,7 +64,7 @@ public class InsertBloodStockHandlerTests
     }
 
     [Fact]
-    public async Task Add_ReturnsNull_ShouldReturnError()
+    public async Task Handle_WhenAddReturnsNull_ShouldReturnError()
     {
         var repository = Substitute.For<IBloodStockRepository>();
 

@@ -9,7 +9,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class InsertAddressHandlerTests
 {
     [Fact]
-    public async Task AddressExists_Insert_Success()
+    public async Task Handler_WhenAddressExists_ShouldInsertAddressSuccessfully()
     {
 
         var repository = Substitute.For<IAddressRepository>();
@@ -58,7 +58,7 @@ public class InsertAddressHandlerTests
     }
 
     [Fact]
-    public async Task InvalidCep_ReturnsCep()
+    public async Task Handler_WhenInvalidCep_ShouldReturnError()
     {
         
         var repository = Substitute.For<IAddressRepository>();
@@ -84,7 +84,7 @@ public class InsertAddressHandlerTests
     }
 
     [Fact]
-    public async Task NoStreetFound_ReturnsError()
+    public async Task Handler_WhenNoStreetFound_ShouldReturnError()
     {
         var repository = Substitute.For<IAddressRepository>();
         var cepService = Substitute.For<ICepService>();
@@ -116,7 +116,7 @@ public class InsertAddressHandlerTests
     }
 
     [Fact]
-    public async Task DonorIdNotFound_ReturnsError()
+    public async Task Handler_WhenDonorIdNotFound_ShouldReturnError()
     {
         
 

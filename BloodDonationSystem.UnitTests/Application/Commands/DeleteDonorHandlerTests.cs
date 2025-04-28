@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class DeleteDonorHandlerTests
 {
     [Fact]
-    public async Task DonorExists_Delete_Success()
+    public async Task Hanlder_WhenDonorExists_ShouldDeleteDonor()
     {
       
         var repository = Substitute.For<IDonorRepository>();
@@ -31,7 +31,7 @@ public class DeleteDonorHandlerTests
     }
 
     [Fact]
-    public async Task DonorDoesNotExist_ReturnsError()
+    public async Task Handler_WhenDonorDoesNotExist_Should_ReturnError()
     {
       
         var repository = Substitute.For<IDonorRepository>();

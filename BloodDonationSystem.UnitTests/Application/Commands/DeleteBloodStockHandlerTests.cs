@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class DeleteBloodStockHandlerTests
 {
     [Fact]
-    public async Task DeleteBloodStock_ReturnsSuccess_WhenDeletedSuccessfully()
+    public async Task Handler_WhenDeleteBloodStock_Should_ReturnsSuccess()
     {
         var repository = Substitute.For<IBloodStockRepository>();
 
@@ -34,7 +34,7 @@ public class DeleteBloodStockHandlerTests
     }
 
     [Fact]
-    public async Task DeleteBloodStock_ReturnsError_WhenBloodStockNotFound()
+    public async Task Handler_WhenBloodStockNotFound_Should_ReturnsError()
     {
       
         var repository = Substitute.For<IBloodStockRepository>();
@@ -53,7 +53,7 @@ public class DeleteBloodStockHandlerTests
     }
 
     [Fact]
-    public async Task DeleteBloodStock_ReturnsError_WhenAlreadyDeleted()
+    public async Task Handler_WhenAlreadyDeleteBloodStock_Should_ReturnsError()
     {
    
         var repository = Substitute.For<IBloodStockRepository>();

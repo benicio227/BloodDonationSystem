@@ -8,7 +8,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class UpdateDonorHandlerTests
 {
     [Fact]
-    public async Task DonorExists_Update_Success()
+    public async Task Handler_WhenDonorExists_Should_Update()
     {
         var repository = Substitute.For<IDonorRepository>();
 
@@ -41,7 +41,7 @@ public class UpdateDonorHandlerTests
     }
 
     [Fact]
-    public async Task NoDonorFound_ReturnsError()
+    public async Task Handler_WhenNoDonorFound_Should_ReturnError()
     {
         var repository = Substitute.For<IDonorRepository>();
 
@@ -73,7 +73,7 @@ public class UpdateDonorHandlerTests
     }
 
     [Fact]
-    public async Task NoUpdateDonor_ReturnsError()
+    public async Task Handler_WhenNoUpdateDonor_Should_ReturnsError()
     {
         var repository = Substitute.For<IDonorRepository>();
 

@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Queries;
 public class GetDonorByIdHandlerTests
 {
     [Fact]
-    public async Task GetDonorById_ReturnsSuccess_WhenDonorIsFound()
+    public async Task Handle_WhenDonorExists_ShouldReturnDonorSuccessfully()
     {
         var repository = Substitute.For<IDonorRepository>();
 
@@ -35,7 +35,7 @@ public class GetDonorByIdHandlerTests
     }
 
     [Fact]
-    public async Task GetDonorById_ReturnsError_WhenDonorNotFound()
+    public async Task Handle_WhenDonorNotFound_ShouldReturnError()
     {
        
         var repository = Substitute.For<IDonorRepository>();
@@ -55,7 +55,7 @@ public class GetDonorByIdHandlerTests
     }
 
     [Fact]
-    public async Task GetDonorById_ReturnsError_WhenDonorIsDeleted()
+    public async Task Handle_WhenDonorIsDeleted_ShouldReturnError()
     {
       
         var repository = Substitute.For<IDonorRepository>();

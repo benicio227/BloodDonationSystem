@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Commands;
 public class UpdateAddressHandlerTests
 {
     [Fact]
-    public async Task AddressExists_Update_Success()
+    public async Task Handler_WhenAddressExists_Should_Update()
     {
         var repository = Substitute.For<IAddressRepository>();
 
@@ -34,7 +34,7 @@ public class UpdateAddressHandlerTests
     }
 
     [Fact]
-    public async Task AddressNotFound_ShouldReturnError()
+    public async Task Handler_WhenAddressNotFound_Should_ReturnError()
     {
         var repository = Substitute.For<IAddressRepository>();
 
@@ -58,7 +58,7 @@ public class UpdateAddressHandlerTests
     }
 
     [Fact]
-    public async Task UpdateFails_ShouldReturnError()
+    public async Task Handler_WhenUpdateFails_Should_ReturnError()
     {
         var repository = Substitute.For<IAddressRepository>();
 

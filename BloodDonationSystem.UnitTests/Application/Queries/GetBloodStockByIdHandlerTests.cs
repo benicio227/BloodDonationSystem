@@ -7,7 +7,7 @@ namespace BloodDonationSystem.UnitTests.Application.Queries;
 public class GetBloodStockByIdHandlerTests
 {
     [Fact]
-    public async Task GetBloodStockById_ReturnsSuccess_WhenBloodStockIsFound()
+    public async Task Handle_WhenBloodStockExists_ShouldReturnBloodStockSuccessfully()
     {
         var repository = Substitute.For<IBloodStockRepository>();
 
@@ -30,16 +30,18 @@ public class GetBloodStockByIdHandlerTests
         var result = await handler.Handle(query, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
+        Assert.NotNull(result.Data);
         Assert.Equal("A+", result.Data.BloodType);
     }
 
     [Fact]
-    public async Task GetBloodStockById_ReturnsError_WhenBloodStockNotFound()
+    public async Task Handle_WhenBloodStockNotFound_ShouldReturnError()
     {
         var repository = Substitute.For<IBloodStockRepository>();
         
         var bloodStockId = 99;
-        repository.GetById(bloodStockId).Returns(Task.FromResult<BloodStock>(null!));
+
+        repository.GetById(bloodStockId).Returns(Task.FromResult<BloodStock?>(null));
 
         var handler = new GetBloodStockByIdHandler(repository);
         var query = new GetBloodStockByIdQuery(bloodStockId);
