@@ -15,17 +15,12 @@ public class GetDonationByIdHandler : IRequestHandler<GetDonationByIdQuery, Resu
     {
         var donation = await _repository.GetById(request.Id);
 
-        if (donation is null)
+        if (donation is null || donation.IsDeleted)
         {
             return ResultViewModel<DonationViewModel>.Error($"Doação com ID {request.Id} não encontrado.");
         }
 
-        if (donation.IsDeleted)
-        {
-            return ResultViewModel<DonationViewModel>.Error($"Donação foi excluída.");
-        }
-
-        var model = DonationViewModel.FromEntity(donation!);
+        var model = DonationViewModel.FromEntity(donation);
 
         return ResultViewModel<DonationViewModel>.Success(model);
     }
