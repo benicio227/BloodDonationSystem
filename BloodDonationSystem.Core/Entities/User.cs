@@ -3,9 +3,8 @@
 namespace BloodDonationSystem.Core.Entities;
 public class User
 {
-    public User(int id, string email, string password, string role)
+    public User(string email, string password, string role)
     {
-        Id = id;
         Email = email;
         Password = password;
         Role = role;
