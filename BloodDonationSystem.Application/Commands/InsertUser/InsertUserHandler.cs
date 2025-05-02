@@ -1,13 +1,30 @@
 ﻿using BloodDonationSystem.Application.Entities;
 using BloodDonationSystem.Application.Models;
+using BloodDonationSystem.Core.Repositories;
+using BloodDonationSystem.Infrastucture.Auth;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.InsertUser;
 public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewModel<UserViewModel>>
 {
-    public Task<ResultViewModel<UserViewModel>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
+    private readonly IUserRepository _userRepository;
+    private readonly IDonorRepository _donorRepository;
+    private readonly IAuthService _authService;
+
+    public InsertUserHandler(IUserRepository userRepository, IDonorRepository donorRepository, IAuthService authService)
     {
-        var user = request.ToEntity();
+        _userRepository = userRepository;
+        _donorRepository = donorRepository; 
+        _authService = authService;
+
+    }
+    public async Task<ResultViewModel<UserViewModel>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
+    {
+        var hash = _authService.ComputeHash(request.Password);
+
+        var user = request.ToEntity(hash);
+
+        await _userRepository.Add(user);
 
         var donor = new Donor(
              request.FullName,
@@ -18,5 +35,11 @@ public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewMo
              request.RgFactor,
              user.Id
         );
+
+        await _donorRepository.Add(donor);
+
+        var model = UserViewModel.FromEntity(donor);
+
+        return ResultViewModel<UserViewModel>.Success(model);
     }
 }

@@ -16,8 +16,8 @@ public class InsertUserCommand : IRequest<ResultViewModel<UserViewModel>>
     public string RgFactor { get; set; }
 
 
-    public User ToEntity()
+    public User ToEntity(string hash)
     {
-        return new User(Email, Password, Role);
+        return new User(Email, hash, Role);
     }
 }
