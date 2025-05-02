@@ -10,7 +10,7 @@ public class ApiExceptionHandler : IExceptionHandler
         var detailsDefault = new ProblemDetails
         {
             Status = StatusCodes.Status500InternalServerError,
-            Title = "Server Errror"
+            Title = "Server Error"
         };
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
