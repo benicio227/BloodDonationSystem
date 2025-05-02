@@ -1,11 +1,13 @@
 using BloodDonationSystem.Api.ExceptionHandler;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Core.Repositories;
+using BloodDonationSystem.Infrastucture.Auth;
 using BloodDonationSystem.Infrastucture.Cep;
 using BloodDonationSystem.Infrastucture.Persistence;
 using BloodDonationSystem.Infrastucture.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +24,11 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<InsertDonorCommand>();
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddHttpClient<ICepService, CepService>();
 
