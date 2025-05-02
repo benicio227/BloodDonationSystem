@@ -12,12 +12,6 @@ public class InsertDonorValidator : AbstractValidator<InsertDonorCommand>
             .MaximumLength(100)
                 .WithMessage("O tamanho máximo deve ser de até 100 caracteres.");
 
-        RuleFor(d => d.Email)
-            .NotEmpty()
-                .WithMessage("E-mail é obrigatório.")
-            .EmailAddress()
-                .WithMessage("E-mail inválido.");
-
         RuleFor(d => d.Gender)
             .NotEmpty()
                 .WithMessage("O gênero é obrigatório.")

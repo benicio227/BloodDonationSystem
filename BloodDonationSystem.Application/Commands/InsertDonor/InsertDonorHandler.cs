@@ -13,12 +13,12 @@ public class InsertDonorHandler : IRequestHandler<InsertDonorCommand, ResultView
     }
     public async Task<ResultViewModel<DonorViewModel>> Handle(InsertDonorCommand request, CancellationToken cancellationToken)
     {
-        var donorExist = await _repository.GetByEmail(request.Email);
+        //var donorExist = await _repository.GetByEmail(request.Email);
 
-        if (donorExist is not null)
-        {
-            return ResultViewModel<DonorViewModel>.Error("Já existe um doador com esse E-mail.");
-        }
+        //if (donorExist is not null)
+        //{
+        //    return ResultViewModel<DonorViewModel>.Error("Já existe um doador com esse E-mail.");
+        //}
 
         var donorEntity = request.ToEntity();
 

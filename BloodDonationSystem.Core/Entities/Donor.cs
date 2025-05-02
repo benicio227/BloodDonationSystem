@@ -1,7 +1,9 @@
-﻿namespace BloodDonationSystem.Application.Entities;
+﻿using BloodDonationSystem.Core.Entities;
+
+namespace BloodDonationSystem.Application.Entities;
 public class Donor
 {
-    public Donor(string fullName, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor)
+    public Donor(string fullName, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor, int userId)
     {
         FullName = fullName;
         BirthDate = birthDate;
@@ -9,9 +11,11 @@ public class Donor
         Weight = weight;
         BloodType = bloodType;
         RgFactor = rgFactor;
+        UserId = userId;
         IsDeleted = false;
     }
     public int Id { get; private set; }
+    public int UserId {  get; private set; }
     public string FullName { get; private set; }
     public DateTime BirthDate {  get; private set; }
     public string Gender {  get; private set; }
@@ -21,6 +25,7 @@ public class Donor
     public bool IsDeleted {  get; private set; }
     public List<Donation> Donations { get; private set; } = new List<Donation>();
     public Address? Address {  get; private set; }
+    public User User {  get; private set; }
 
     public void UpdateWeight(double weight)
     {

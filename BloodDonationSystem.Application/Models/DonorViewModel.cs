@@ -3,11 +3,10 @@
 namespace BloodDonationSystem.Application.Models;
 public class DonorViewModel
 {
-    public DonorViewModel(int id, string fullName, string email, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor)
+    public DonorViewModel(int id, string fullName, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor)
     {
         Id = id;
         FullName = fullName;
-        Email = email;
         BirthDate = birthDate;
         Gender = gender;
         Weight = weight;
@@ -25,6 +24,6 @@ public class DonorViewModel
 
     public static DonorViewModel FromEntity(Donor donor)
     {
-        return new DonorViewModel(donor.Id, donor.FullName, donor.Email, donor.BirthDate, donor.Gender, donor.Weight, donor.BloodType, donor.RgFactor);
+        return new DonorViewModel(donor.Id, donor.FullName, donor.BirthDate, donor.Gender, donor.Weight, donor.BloodType, donor.RgFactor);
     }
 }

@@ -38,13 +38,6 @@ public class DonorRepository : IDonorRepository
         return true;
     }
 
-    public async Task<Donor?> GetByEmail(string email)
-    {
-        var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Email == email);
-
-        return donor;
-    }
-
     public async Task<Donor?> GetById(int id)
     {
         var donor = await _context.Donors.FirstOrDefaultAsync(d => d.Id == id);

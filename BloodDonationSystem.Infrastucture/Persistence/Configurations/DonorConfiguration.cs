@@ -10,7 +10,6 @@ public class DonorConfiguration : IEntityTypeConfiguration<Donor>
         builder.HasKey(d => d.Id);
 
         builder.Property(d => d.FullName).IsRequired().HasMaxLength(100);
-        builder.Property(d => d.Email).IsRequired().HasMaxLength(100);
         builder.Property(d => d.BirthDate).IsRequired();
         builder.Property(d => d.Gender).IsRequired().HasMaxLength(20);
         builder.Property(d => d.Weight).IsRequired();

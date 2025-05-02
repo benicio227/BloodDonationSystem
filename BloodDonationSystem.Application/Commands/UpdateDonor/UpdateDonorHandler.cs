@@ -20,7 +20,6 @@ public class UpdateDonorHandler : IRequestHandler<UpdateDonorCommand, ResultView
             return ResultViewModel.Error("Doador não encontrado.");
         }
 
-        donor.UpdateEmail(request.Email);
         donor.UpdateWeight(request.Weight);
         donor.UpdateBloodType(request.BloodType);
         donor.UpdateRgFactor(request.RgFactor);
