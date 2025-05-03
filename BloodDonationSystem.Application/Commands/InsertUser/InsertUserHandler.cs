@@ -24,6 +24,13 @@ public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewMo
 
         var user = request.ToEntity(hash);
 
+        var alreadyExistUserEmail = await _userRepository.GetByEmail(request.Email);
+
+        if (alreadyExistUserEmail is not null)
+        {
+            return ResultViewModel<UserViewModel>.Error("Já existe um usuário com esse E-mail.");
+        }
+
         await _userRepository.Add(user);
 
         var donor = new Donor(
