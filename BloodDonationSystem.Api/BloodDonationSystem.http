@@ -1,6 +1,46 @@
 @BloodDonationSystem_HostAddress = http://localhost:5098
 
-GET {{BloodDonationSystem_HostAddress}}/weatherforecast/
+@JwtToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia2l2aWFAaG90bWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDbGllbnQiLCJleHAiOjE3NDYzMDU2NjAsImlzcyI6IkJsb29kRG9uYXRpb25TeXN0ZW0uQVBJIiwiYXVkIjoiQmxvb2REb25hdGlvblN5c3RlbUFwaSJ9.O0ahujpte5ub59KmifQ-7INjKI3HFH9bxPiKub4L_70
+POST {{BloodDonationSystem_HostAddress}}/api/user
+Content-Type: application/json
 Accept: application/json
 
-###
+{
+  "email": "kivia@hotmail.com",
+  "password": "20100119Bb@",
+  "role": "Client",
+  "fullName": "Kivia Silva",
+  "birthDate": "1990-01-01",
+  "gender": "Feminino",
+  "weight": 89,
+  "bloodType": "A+",
+  "rgFactor": "R-"
+}
+
+### Login
+
+@BloodDonationSystem_HostAddress = http://localhost:5098
+PUT {{BloodDonationSystem_HostAddress}}/api/login/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "kivia@hotmail.com",
+  "password": "20100119Bb@"
+}
+
+### Create a new Donation
+@BloodDonationSystem_HostAddress = http://localhost:5098
+POST {{BloodDonationSystem_HostAddress}}/api/donors/1006/donations
+Authorization: Bearer {{JwtToken}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "amountMl": 470
+}
+
+
+
+
+

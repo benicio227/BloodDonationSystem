@@ -44,7 +44,7 @@ public class AuthService : IAuthService
 
         var claims = new List<Claim>
         {
-            new Claim("username", email),
+            new Claim(ClaimTypes.Name, email),
             new Claim(ClaimTypes.Role, role)
         };
 

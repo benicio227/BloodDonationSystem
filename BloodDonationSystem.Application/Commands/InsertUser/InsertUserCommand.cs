@@ -7,7 +7,7 @@ public class InsertUserCommand : IRequest<ResultViewModel<UserViewModel>>
 {
     public string Email { get; set; }
     public string Password { get; set; }
-    public string Role { get; set; } = "Donor";
+    public string Role { get; set; } = "Client";
     public string FullName { get; set; }
     public DateTime BirthDate { get; set; }
     public string Gender { get; set; }

@@ -1,24 +1,23 @@
-﻿using BloodDonationSystem.Application.Commands.InsertUser;
+﻿using BloodDonationSystem.Application.Commands.LoginUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonationSystem.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
-public class UserController : ControllerBase
+public class LoginController : ControllerBase
 {
     private readonly IMediator _mediator;
-
-    public UserController(IMediator mediator)
+    public LoginController(IMediator mediator)
     {
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPut("login")]
     [AllowAnonymous]
-    public async Task<ActionResult> Post(InsertUserCommand command)
+    public async Task<ActionResult> Login(LoginUserCommand command)
     {
         var result = await _mediator.Send(command);
 
@@ -27,6 +26,6 @@ public class UserController : ControllerBase
             return BadRequest(result.Message);
         }
 
-        return Created(string.Empty, result);
+        return Ok(result);
     }
 }

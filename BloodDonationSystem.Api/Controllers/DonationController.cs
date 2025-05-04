@@ -3,6 +3,7 @@ using BloodDonationSystem.Application.Commands.InsertDonation;
 using BloodDonationSystem.Application.Queries.GetAllDonationById;
 using BloodDonationSystem.Application.Queries.GetDonationById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonationSystem.Api.Controllers;
@@ -17,7 +18,9 @@ public class DonationController : ControllerBase
         _mediator = mediator;
     }
 
+   
     [HttpPost]
+    [Authorize(Roles = "Client")]
     public async Task<IActionResult> Post(int donorId, InsertDonationCommand command)
     {
         command.DonorId = donorId;

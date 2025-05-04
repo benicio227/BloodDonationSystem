@@ -3,11 +3,13 @@ using BloodDonationSystem.Application.Commands.DeleteDonor;
 using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Application.Queries.GetDonorById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonationSystem.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class DonorController : ControllerBase
 {
     private readonly IMediator _mediator;

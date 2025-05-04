@@ -45,10 +45,6 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             return ResultViewModel<DonationViewModel>.Error("O doador precisa ter 18 anos ou mais para doar sangue.");
         }
 
-        var donation = request.ToEntity();
-
-        await _repository.Add(donation);
-
         var bloodStock = await _bloodStockrepository.GetByTypeAndFactor(donor.BloodType, donor.RgFactor);
 
         if (bloodStock is null)
@@ -56,6 +52,11 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             return ResultViewModel<DonationViewModel>.Error("Estoque não encontrado para esse tipo sanguíneo.");
         }
 
+        var donation = request.ToEntity();
+
+        await _repository.Add(donation);
+
+    
         bloodStock.AddAmount(donation.AmountMl);
 
         await _bloodStockrepository.Update(bloodStock);
