@@ -3,9 +3,10 @@
 namespace BloodDonationSystem.Application.Entities;
 public class Donor
 {
-    public Donor(string fullName, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor, int userId)
+    public Donor(string fullName, string email, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor, int userId)
     {
         FullName = fullName;
+        Email = email;
         BirthDate = birthDate;
         Gender = gender;
         Weight = weight;
@@ -17,6 +18,7 @@ public class Donor
     public int Id { get; private set; }
     public int UserId {  get; private set; }
     public string FullName { get; private set; }
+    public string Email { get; private set; }
     public DateTime BirthDate {  get; private set; }
     public string Gender {  get; private set; }
     public double Weight { get; private set; }
