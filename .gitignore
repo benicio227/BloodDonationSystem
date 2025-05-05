@@ -67,3 +67,5 @@ out/
 ########################
 secrets.json
 appsettings.Development.json
+appsettings.json
+launchSettings.json
