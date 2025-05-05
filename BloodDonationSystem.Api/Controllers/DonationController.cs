@@ -20,7 +20,6 @@ public class DonationController : ControllerBase
 
    
     [HttpPost]
-    [Authorize(Roles = "Client")]
     public async Task<IActionResult> Post(int donorId, InsertDonationCommand command)
     {
         command.DonorId = donorId;
