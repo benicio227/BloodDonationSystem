@@ -11,16 +11,19 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
     private readonly IDonorRepository _donorRepository;
     private readonly IBloodStockRepository _bloodStockrepository;
     private readonly IMediator _mediator;
+    private readonly IBrevoEmailService _brevoEmailService;
     public InsertDonationHandler(
         IDonationRepository repository,
         IDonorRepository donorRepository,
         IBloodStockRepository bloodStockRepository,
-        IMediator mediator)
+        IMediator mediator,
+        IBrevoEmailService brevoEmailService)
     {
         _repository = repository;
         _donorRepository = donorRepository;
         _bloodStockrepository = bloodStockRepository;
         _mediator = mediator;
+        _brevoEmailService = brevoEmailService;
     }
     public async Task<ResultViewModel<DonationViewModel>> Handle(InsertDonationCommand request, CancellationToken cancellationToken)
     {
@@ -56,7 +59,13 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
 
         await _repository.Add(donation);
 
-    
+        await _mediator.Publish(new DonationRegisteredDomainEvent(
+            donor.Email,
+            donor.FullName,
+            donation.AmountMl
+        ), cancellationToken);
+
+
         bloodStock.AddAmount(donation.AmountMl);
 
         await _bloodStockrepository.Update(bloodStock);

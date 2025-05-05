@@ -3,6 +3,7 @@ using BloodDonationSystem.Application.Commands.InsertDonor;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Auth;
 using BloodDonationSystem.Infrastucture.Cep;
+using BloodDonationSystem.Infrastucture.Email;
 using BloodDonationSystem.Infrastucture.Persistence;
 using BloodDonationSystem.Infrastucture.Repositories;
 using FluentValidation;
@@ -46,6 +47,7 @@ builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddHttpClient<IBrevoEmailService, BrevoEmailService>();
 
 
 builder.Services.AddHttpClient<ICepService, CepService>();

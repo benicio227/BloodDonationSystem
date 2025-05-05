@@ -1,5 +1,6 @@
 ﻿using BloodDonationSystem.Application.Entities;
 using BloodDonationSystem.Application.Models;
+using BloodDonationSystem.Core.Events;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Auth;
 using MediatR;
@@ -10,12 +11,17 @@ public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewMo
     private readonly IUserRepository _userRepository;
     private readonly IDonorRepository _donorRepository;
     private readonly IAuthService _authService;
+    private readonly IMediator _mediator;
 
-    public InsertUserHandler(IUserRepository userRepository, IDonorRepository donorRepository, IAuthService authService)
+    public InsertUserHandler(IUserRepository userRepository,
+        IDonorRepository donorRepository,
+        IAuthService authService,
+        IMediator mediator)
     {
         _userRepository = userRepository;
         _donorRepository = donorRepository; 
         _authService = authService;
+        _mediator = mediator;
 
     }
     public async Task<ResultViewModel<UserViewModel>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
@@ -35,6 +41,7 @@ public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewMo
 
         var donor = new Donor(
              request.FullName,
+             request.Email,
              request.BirthDate,
              request.Gender,
              request.Weight,
@@ -44,6 +51,12 @@ public class InsertUserHandler : IRequestHandler<InsertUserCommand, ResultViewMo
         );
 
         await _donorRepository.Add(donor);
+
+        await _mediator.Publish(new UserRegisteredDomainEvent(
+            donor.Email,
+            donor.FullName
+        ), cancellationToken);
+
 
         var model = UserViewModel.FromEntity(donor);
 
