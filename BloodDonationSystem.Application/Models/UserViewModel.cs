@@ -1,9 +1,10 @@
 ﻿using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Enums;
 
 namespace BloodDonationSystem.Application.Models;
 public class UserViewModel
 {
-    public UserViewModel(string fullName, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor)
+    public UserViewModel(string fullName, DateTime birthDate, Gender gender, double weight, BloodType bloodType, RgFactor rgFactor)
     {
         FullName = fullName;
         BirthDate = birthDate;
@@ -14,10 +15,10 @@ public class UserViewModel
     }
     public string FullName { get; set; }
     public DateTime BirthDate { get; set; }
-    public string Gender { get; set; }
+    public Gender Gender { get; set; }
     public double Weight { get; set; }
-    public string BloodType { get; set; }
-    public string RgFactor { get; set; }
+    public BloodType BloodType { get; set; }
+    public RgFactor RgFactor { get; set; }
 
     public static UserViewModel FromEntity(Donor donor)
     {
