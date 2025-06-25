@@ -27,8 +27,8 @@ public class Donor
     public bool IsDeleted {  get; private set; }
     public List<Donation> Donations { get; private set; } = new List<Donation>();
     public Address? Address {  get; private set; }
-    public User User {  get; private set; }
-    public Appointment Appointment {  get; private set; }
+    public User? User {  get; private set; }
+    public Appointment? Appointment {  get; private set; }
 
     public void UpdateWeight(double weight)
     {

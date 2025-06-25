@@ -34,6 +34,10 @@ public class Address
         State = state;
     }
 
+    public void UpdateCep(string cep)
+    {
+        Cep = cep;
+    }
     public void Delete()
     {
         IsDeleted = true;

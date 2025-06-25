@@ -16,7 +16,7 @@ public class Appointment
     public DateTime ScheduledAt { get; private set; }
     public LocationType Location { get; private set; }
     public bool IsDeleted { get; private set; }
-    public Donor Donor { get; private set; }
+    public Donor? Donor { get; private set; }
 
     public void Delete()
     {

@@ -17,7 +17,7 @@ public class User
     public string Role { get; private set; } = "Donor";
     public bool IsDeleted { get; private set; }
 
-    public Donor Donor { get; private set; }
+    public Donor? Donor { get; private set; }
 
     public void UpdateEmail(string email)
     {
