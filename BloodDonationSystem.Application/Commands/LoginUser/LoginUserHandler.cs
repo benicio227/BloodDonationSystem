@@ -24,7 +24,7 @@ internal class LoginUserHandler : IRequestHandler<LoginUserCommand, ResultViewMo
             return ResultViewModel<LoginViewModel>.Error("Erro de login.");
         }
 
-        var token = _authService.GenerateToken(user.Email, user.Role);
+        var token = _authService.GenerateToken(user.Email, user.Role.ToString());
 
         var model = LoginViewModel.FromEntity(token);
 
