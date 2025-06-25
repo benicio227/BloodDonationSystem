@@ -34,7 +34,7 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             return ResultViewModel<DonationViewModel>.Error($"Nenhum id {request.DonorId} encontrado.");
         }
 
-        var validResult =  await ValidateDonationInterval(donor.Id, donor.Gender);
+        var validResult =  await ValidateDonationInterval(donor.Id, donor.Gender.ToString());
 
         if (validResult is not null)
         {
@@ -48,7 +48,7 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             return ResultViewModel<DonationViewModel>.Error("O doador precisa ter 18 anos ou mais para doar sangue.");
         }
 
-        var bloodStock = await _bloodStockrepository.GetByTypeAndFactor(donor.BloodType, donor.RgFactor);
+        var bloodStock = await _bloodStockrepository.GetByTypeAndFactor(donor.BloodType.ToString(), donor.RgFactor.ToString());
 
         if (bloodStock is null)
         {
@@ -80,8 +80,8 @@ public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, Resu
             };
 
             var domainEvent = new BloodStockBelowMinimumDomainEvent(
-                donor.BloodType,
-                donor.RgFactor,
+                donor.BloodType.ToString(),
+                donor.RgFactor.ToString(),
                 bloodStock.AmountMl,
                 bloodStock.MinimumAmountMl
             );
