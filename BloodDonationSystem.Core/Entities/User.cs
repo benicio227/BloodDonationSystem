@@ -1,9 +1,10 @@
 ﻿using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Enums;
 
 namespace BloodDonationSystem.Core.Entities;
 public class User
 {
-    public User(string email, string password, string role)
+    public User(string email, string password, UserRole role)
     {
         Email = email;
         Password = password;
@@ -14,10 +15,10 @@ public class User
     public int Id { get; private set; }
     public string Email {  get; private set; }
     public string Password {  get; private set; }
-    public string Role { get; private set; } = "Donor";
+    public UserRole Role { get; private set; }
     public bool IsDeleted { get; private set; }
 
-    public Donor? Donor { get; private set; }
+    public Donor? Donor { get; private set; } //Nem todo usuário precisa ser um doador, por isso ?
 
     public void UpdateEmail(string email)
     {
@@ -29,5 +30,8 @@ public class User
         Password = password;
     }
 
-
+    public void Delete()
+    {
+        IsDeleted = true;
+    }
 }
