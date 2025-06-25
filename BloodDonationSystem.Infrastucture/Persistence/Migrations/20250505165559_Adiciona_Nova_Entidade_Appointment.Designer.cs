@@ -4,6 +4,7 @@ using BloodDonationSystem.Infrastucture.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationSystem.Infrastucture.Persistence.Migrations
 {
     [DbContext(typeof(BloodDonationSystemDbContext))]
-    partial class BloodDonationSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505165559_Adiciona_Nova_Entidade_Appointment")]
+    partial class Adiciona_Nova_Entidade_Appointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

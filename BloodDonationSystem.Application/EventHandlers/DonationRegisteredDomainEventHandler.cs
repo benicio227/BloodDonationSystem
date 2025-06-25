@@ -19,7 +19,7 @@ namespace BloodDonationSystem.Application.EventHandlers
             await _emailService.SendEmail(
                 toEmail: notification.Email,
                 toName: notification.FullName,
-                subject: "Confirmação de doação de sangue",
+                subject: "Confirmação de Agendamento de Doação",
                 htmlContent: htmlContent
             );
         }
