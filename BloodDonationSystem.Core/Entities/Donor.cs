@@ -1,9 +1,10 @@
 ﻿using BloodDonationSystem.Core.Entities;
+using BloodDonationSystem.Core.Enums;
 
 namespace BloodDonationSystem.Application.Entities;
 public class Donor
 {
-    public Donor(string fullName, string email, DateTime birthDate, string gender, double weight, string bloodType, string rgFactor, int userId)
+    public Donor(string fullName, string email, DateTime birthDate, Gender gender, double weight, BloodType bloodType, RgFactor rgFactor, int userId)
     {
         FullName = fullName;
         Email = email;
@@ -20,10 +21,10 @@ public class Donor
     public string FullName { get; private set; }
     public string Email { get; private set; }
     public DateTime BirthDate {  get; private set; }
-    public string Gender {  get; private set; }
+    public Gender Gender {  get; private set; }
     public double Weight { get; private set; }
-    public string BloodType {  get; private set; }
-    public string RgFactor {  get; private set; }
+    public BloodType BloodType {  get; private set; }
+    public RgFactor RgFactor {  get; private set; }
     public bool IsDeleted {  get; private set; }
     public List<Donation> Donations { get; private set; } = new List<Donation>();
     public Address? Address {  get; private set; }
@@ -35,12 +36,12 @@ public class Donor
         Weight = weight;
     }
 
-    public void UpdateBloodType(string bloodType)
+    public void UpdateBloodType(BloodType bloodType)
     {
         BloodType = bloodType;
     }
 
-    public void UpdateRgFactor(string rgFactor)
+    public void UpdateRgFactor(RgFactor rgFactor)
     {
         RgFactor = rgFactor;
     }
