@@ -14,9 +14,8 @@ public class InsertDonorValidator : AbstractValidator<InsertDonorCommand>
 
         RuleFor(d => d.Gender)
             .NotEmpty()
-                .WithMessage("O gênero é obrigatório.")
-            .Must(g => g == "Masculino" || g == "Feminino")
-                .WithMessage("O gênero deve ser masculino ou feminino.");
+                .IsInEnum()
+                .WithMessage("O gênero é obrigatório.");
 
         RuleFor(d => d.Weight)
             .GreaterThanOrEqualTo(50)
