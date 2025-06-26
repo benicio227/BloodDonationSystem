@@ -3,7 +3,6 @@ using BloodDonationSystem.Application.Commands.InsertDonation;
 using BloodDonationSystem.Application.Queries.GetAllDonationById;
 using BloodDonationSystem.Application.Queries.GetDonationById;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonationSystem.Api.Controllers;
@@ -35,13 +34,13 @@ public class DonationController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(int donorId, int id)
     {
         var query = new GetDonationByIdQuery(id);
 
         var result = await _mediator.Send(query);
 
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Data?.DonorId != donorId)
         {
             return BadRequest(result.Message);
         }
@@ -65,7 +64,7 @@ public class DonationController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int donor, int id)
     {
         var query = new DeleteDonationByIdQuery(id);
 
