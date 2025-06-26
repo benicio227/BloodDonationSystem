@@ -65,14 +65,14 @@ public class DonorController : ControllerBase
     public async Task<IActionResult> Update(int id, UpdateDonorCommand command)
     {
 
-        var result = await _mediator.Send(command);
-
         if (id != command.Id && command.Id != 0)
         {
             return BadRequest("O id da rota não bate com o id do corpo da requisição.");
         }
 
         command.Id = id;
+
+        var result = await _mediator.Send(command);
 
         return NoContent();
     }
