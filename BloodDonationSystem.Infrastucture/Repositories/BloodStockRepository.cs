@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Enums;
 using BloodDonationSystem.Core.Repositories;
 using BloodDonationSystem.Infrastucture.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,7 @@ public class BloodStockRepository : IBloodStockRepository
         return bloodStock;
     }
 
-    public async Task<BloodStock?> GetByTypeAndFactor(string bloodType, string rhFactor)
+    public async Task<BloodStock?> GetByTypeAndFactor(BloodType bloodType, RgFactor rhFactor)
     {
         var bloodStock = await _context.bloodStocks.FirstOrDefaultAsync(b => b.BloodType == bloodType && b.RgFactor == rhFactor);
 

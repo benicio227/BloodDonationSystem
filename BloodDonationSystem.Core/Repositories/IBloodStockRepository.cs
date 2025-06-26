@@ -1,4 +1,5 @@
 ﻿using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Enums;
 
 namespace BloodDonationSystem.Core.Repositories;
 public interface IBloodStockRepository
@@ -8,7 +9,7 @@ public interface IBloodStockRepository
 
     public Task<BloodStock?> GetById(int id);
 
-    public Task<BloodStock?> GetByTypeAndFactor(string bloodType, string rhFactor);
+    public Task<BloodStock?> GetByTypeAndFactor(BloodType bloodType, RgFactor rhFactor);
 
     public Task Update(BloodStock bloodStock);
     public Task<bool> Delete(int id);

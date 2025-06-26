@@ -1,12 +1,13 @@
 ﻿using BloodDonationSystem.Application.Entities;
 using BloodDonationSystem.Application.Models;
+using BloodDonationSystem.Core.Enums;
 using MediatR;
 
 namespace BloodDonationSystem.Application.Commands.InsertBlood;
 public class InsertBloodStockCommand : IRequest<ResultViewModel<BloodStockViewModel>>
 {
-    public string BloodType { get; set; }
-    public string RgFactor { get; set; }
+    public BloodType BloodType { get; set; }
+    public RgFactor RgFactor { get; set; }
     public int AmountMl { get; set; }
     public int MinimumAmountMl {  get; set; }
 

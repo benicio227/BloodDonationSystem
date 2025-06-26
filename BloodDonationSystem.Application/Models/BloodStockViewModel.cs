@@ -1,9 +1,10 @@
 ﻿using BloodDonationSystem.Application.Entities;
+using BloodDonationSystem.Core.Enums;
 
 namespace BloodDonationSystem.Application.Models;
 public class BloodStockViewModel 
 {
-    public BloodStockViewModel(int id, string bloodType, string rgFactor, int amountMl)
+    public BloodStockViewModel(int id, BloodType bloodType, RgFactor rgFactor, int amountMl)
     {
         Id = id;
         BloodType = bloodType;
@@ -11,8 +12,8 @@ public class BloodStockViewModel
         AmountMl = amountMl;
     }
     public int Id { get; private set; }
-    public string BloodType { get; private set; }
-    public string RgFactor { get; private set; }
+    public BloodType BloodType { get; private set; }
+    public RgFactor RgFactor { get; private set; }
     public int AmountMl { get; private set; }
 
     public static BloodStockViewModel FromEntity(BloodStock bloodStock)
