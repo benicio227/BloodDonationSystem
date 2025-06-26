@@ -1,7 +1,9 @@
-﻿namespace BloodDonationSystem.Application.Entities;
+﻿using BloodDonationSystem.Core.Enums;
+
+namespace BloodDonationSystem.Application.Entities;
 public class BloodStock
 {
-    public BloodStock(string bloodType, string rgFactor, int amountMl, int minimumAmountMl)
+    public BloodStock(BloodType bloodType, RgFactor rgFactor, int amountMl, int minimumAmountMl)
     {
         BloodType = bloodType;
         RgFactor = rgFactor;
@@ -11,8 +13,8 @@ public class BloodStock
 
     }
     public int Id { get; private set; }
-    public string BloodType {  get; private set; }
-    public string RgFactor {  get; private set; }
+    public BloodType BloodType {  get; private set; }
+    public RgFactor RgFactor {  get; private set; }
     public int AmountMl { get; private set; }
     public int MinimumAmountMl {  get; private set; }
     public bool IsDeleted {  get; private set; }
