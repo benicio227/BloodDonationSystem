@@ -49,9 +49,11 @@ public class AddressController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int donorId, UpdateAddressCommand command)
+    public async Task<IActionResult> Put(int donorId, int id, UpdateAddressCommand command)
     {
-        command.Id = donorId;
+ 
+        command.Id = id;
+        command.DonorId = donorId;
 
         var result = await _mediator.Send(command);
 
