@@ -23,4 +23,8 @@ public class Appointment
         IsDeleted = true;
     }
 
+    public void Restore()
+    {
+        IsDeleted = false;
+    }
 }
